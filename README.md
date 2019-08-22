@@ -38,7 +38,18 @@ This section is also where you would share links to any wireframes, mockups, dia
 
 ### MongoDB
 
-how to usage
+We will be using the free tier of MongoDB Atlas which is a cloud MongoDB service. You can find more information [here](https://www.mongodb.com/cloud/atlas)
+
+#### Creating the Database
+
+1. Create a free account on the mongodb [website](https://www.mongodb.com/) and [sign in].(https://cloud.mongodb.com/user#/atlas/login)
+
+2. Create a free tier cluster, database and a mongodb user for your cluster. You can follow the instructions [here](https://docs.atlas.mongodb.com/getting-started/#deploy-a-free-tier-cluster) how to do this.
+
+3. In your database create the following collections according to the entity diagram below
+    - user
+    - recipe
+    - category
 
 ### ER Diagram
 
