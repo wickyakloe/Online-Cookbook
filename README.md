@@ -42,7 +42,14 @@ how to usage
 
 ### ER Diagram
 
-Link to ER Diagram here
+The database will be constructed according to the following Entity Relationship diagram:
+
+Inline-style: 
+![ER-Diagram](https://github.com/wickyakloe/Online-Cookbook/raw/master/ER_Diagram_Project_3.jpg "ER-Diagram Online-Cookbook")
+
+Click [here](https://www.draw.io/?lightbox=1&highlight=0000ff&layers=1&nav=1&title=ER_Diagram_Project_3.drawio#Uhttps%3A%2F%2Fraw.githubusercontent.com%2Fwickyakloe%2FOnline-Cookbook%2Fmaster%2FER_Diagram_Project_3.drawio) to view the diagram in your browser.
+
+*This ER-Diagram is made using [draw.io](https://www.draw.io).*
 
 
 ## Features
