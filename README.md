@@ -1,9 +1,28 @@
 # Project Online Cookbook
 
-Create an online cookbook
+Create an online cookbook to Find and share recipes.
 
-- External user’s goal:
-Find and share recipes
+Table of Content:
+
+- [UX](#ux)
+  - [Front-End Mockup](#front-end-mockup)
+- [Database](#database)
+  - [MongoDB](#mongodb)
+    - [Creating the Database](#creating-the-database)
+    - [ER Diagram](#er-diagram)
+- [Features](#features)
+  - [Existing Features](#existing-features)
+  - [Features Left to Implement](#features-left-to-implement)
+- [Technologies Used](#technologies-used)
+- [Testing](#testing)
+- [Deployment](#deployment)
+  - [Heroku](#heroku)
+- [Credits](#credits)
+- [Content](#content)
+- [Media](#media)
+- [Acknowledgements](#acknowledgements)
+
+---
 
 - Site owner's goal:
 Promote a brand of cooking tools.
