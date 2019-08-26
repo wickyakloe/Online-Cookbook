@@ -1,13 +1,22 @@
 /* Navbar items */
-.logoNav{
+.logoNav {
     padding-top: 5px;
-    padding-left:
-    -webkit-filter: brightness(0) invert(1);
     filter: brightness(0) invert(1);
+    -webkit-filter: brightness(0) invert(1);  
 }
 
-.brandName{
+.brandName {
     margin-left: 50px;
     font-size: 18px;
     font-weight: bold;
 }
+
+/* Modal styling */
+.vl {
+    border-left: 6px solid green;
+    height: 500px;
+    position: absolute;
+    left: 50%;
+    margin-left: -3px;
+    top: 0;
+  }
