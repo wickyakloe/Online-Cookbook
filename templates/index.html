@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Hello World</h1>
-<!-- Materialize text -->
-<a class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">add</i></a>
+<h4><i>Find Recipe</i></h4>
+<!-- Materialize autocomplete dropdown -->
+<div class="row">
+    <div class="col s12">
+        <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">textsms</i>
+              <input type="text" id="autocomplete-input" class="autocomplete">
+              <label for="autocomplete-input">Autocomplete</label>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
