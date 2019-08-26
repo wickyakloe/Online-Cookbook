@@ -5,18 +5,29 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
 
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   </head>
 
   <body>
-
+    <nav>
+      <div class="nav-wrapper blue-grey darken-3">
+      <a href="{{ url_for('index') }}" class="brand-logo left"><img src="{{ url_for('static', filename='media/0402-chef_48.png')}}" class="logoNav"></a>
+      <a href="{{ url_for('index') }}" class="brandName">Cook Share</a>
+        <ul id="nav-mobile" class="right">
+          <li class="hide-on-small-only"><span><strong><i>Find & Share Recipes</i></strong></span></li>
+          <li><a class="waves-effect waves-light btn yellow darken-3"><strong>CREATE A RECIPE</strong></a></li>          
+        </ul>
+      </div>
+    </nav>
     {% block content %}
     {% endblock %}
 
     <!--JavaScript at end of body for optimized loading-->
-    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3-4-1.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-3.4.1.min.js') }}"></script>
     <script type="text/javascript" src="{{ url_for('static', filename='js/materialize.min.js') }}""></script>
+
   </body>
 </html>
