@@ -146,6 +146,48 @@ In particular, you should provide all details of the differences between the dep
 
 In addition, if it is not obvious, you should also describe how to run your code locally. -->
 
+### Local deployment
+
+*Instructions for linux*
+
+1. Make sure you have [python3](https://www.python.org/) installed
+2. Install virtualenv with pip
+
+```bash
+#On linux you first need to install pip
+sudo apt install python3-pip
+
+#Then u can install virtualenv using pip3
+sudo pip3 install virtualenv
+```
+
+3.Create a python virtualenv and activate it
+
+```bash
+#Replace online-cookbook with your directory name
+virtualenv online-cookbook
+
+#activate the virtualenv
+source online-cookbook/bin/activate
+
+#deactive the virualenv
+deactivate
+```
+
+4.Install Flask in the virutalenv
+
+```bash
+pip3 install Flask
+```
+
+5.Clone this repository and put the contents in your virtualenv
+
+6.Run the app.py
+
+```bash
+python3 app.py
+```
+
 ### Heroku
 
 How to deploy to heroku here
