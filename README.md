@@ -51,7 +51,11 @@ In particular, as part of this section we recommend that you provide a list of U
 
 This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser. -->
 
-### Front-End Mockup
+- Mockup: View the mockup [here](https://wickyakloe.github.io/Online-Cookbook/mockup/)
+
+- Color choices:
+  - Primary color: ![Primary Color](https://wickyakloe.github.io/Online-Cookbook/materialize_primary_color.png "Materialize blue-grey darken-3")
+  - Secondary color: ![Secondary Color](https://wickyakloe.github.io/Online-Cookbook/materialize_secondary_color.png "Materialize yellow darken-3")
 
 ## Database
 
@@ -80,7 +84,6 @@ Inline-style:
 Click [here](https://www.draw.io/?lightbox=1&highlight=0000ff&layers=1&nav=1&title=ER_Diagram_Project_3.drawio#Uhttps%3A%2F%2Fraw.githubusercontent.com%2Fwickyakloe%2FOnline-Cookbook%2Fmaster%2FER_Diagram_Project_3.drawio) to view the diagram in your browser.
 
 *This ER-Diagram is made using [draw.io](https://www.draw.io).*
-
 
 ## Features
 
