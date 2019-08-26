@@ -18,7 +18,7 @@
       <a href="{{ url_for('index') }}" class="brandName">Cook Share</a>
         <ul id="nav-mobile" class="right">
           <li class="hide-on-small-only"><span><strong><i>Find & Share Recipes</i></strong></span></li>
-          <li><a class="waves-effect waves-light btn yellow darken-3"><strong>CREATE A RECIPE</strong></a></li>          
+          <li><a href="#modal1" class="waves-effect waves-light btn modal-trigger yellow darken-3"><strong>CREATE A RECIPE</strong></a></li>          
         </ul>
       </div>
     </nav>
@@ -41,6 +41,9 @@
             "Google": 'https://placehold.it/250x250'
           },
         });
+
+        // Open a modal using a trigger
+        $('.modal').modal();
       });
     </script>
 
