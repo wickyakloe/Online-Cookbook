@@ -156,7 +156,7 @@ How to deploy to heroku here
 - The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
 
 ### Media
-- The photos used in this site were obtained from ...
+- The icon used as logo in the navbar is from [iconstore](https://iconstore.co/icons/tasty-icons-free/)
 
 ### Acknowledgements
 
