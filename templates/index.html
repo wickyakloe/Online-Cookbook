@@ -15,7 +15,25 @@
 </div>
 <!-- Materialize fab card -->
 <div class="row">
+    {% for recipe in recipes %}
     <div class="col s12 m4">
+        <div class="card medium">
+            <div class="card-image">
+                <img class="materialboxed" src="{{recipe.image_url}}">
+                <span class="card-title">
+                    <strong class="blue-grey darken-3">{{recipe.title}}</strong>
+                </span>
+            </div>
+            <div class="card-content">
+                <p>{{recipe.description}}</p>
+            </div>
+            <div class="card-action">
+                <a href="#"><strong>Recipe</strong></a>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <!-- <div class="col s12 m4">
         <div class="card">
             <div class="card-image">
                 <img src="static/media/0402-chef_48.png">
@@ -38,19 +56,7 @@
                 <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
             </div>
         </div>
-    </div>
-    <div class="col s12 m4">
-        <div class="card">
-            <div class="card-image">
-                <img src="static/media/0402-chef_48.png">
-                <span class="card-title">Card Title</span>
-                <a class="btn-floating halfway-fab waves-effect waves-light yellow darken-3"><i class="material-icons">assignment</i></a>
-            </div>
-            <div class="card-content">
-                <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-            </div>
-        </div>
-    </div>
+    </div> -->
 </div>
 
 <!-- Modal Structure -->
