@@ -17,14 +17,18 @@
 <div class="row">
     {% for recipe in recipes %}
     <div class="col s12 m4">
-        <div class="card">
+        <div class="card medium">
             <div class="card-image">
-                <img src="{{recipe.image_url}}">
-                <span class="card-title">{{recipe.title}}</span>
-                <a class="btn-floating halfway-fab waves-effect waves-light yellow darken-3"><i class="material-icons">assignment</i></a>
+                <img class="materialboxed" src="{{recipe.image_url}}">
+                <span class="card-title">
+                    <strong class="blue-grey darken-3">{{recipe.title}}</strong>
+                </span>
             </div>
             <div class="card-content">
                 <p>{{recipe.description}}</p>
+            </div>
+            <div class="card-action">
+                <a href="#"><strong>Recipe</strong></a>
             </div>
         </div>
     </div>
