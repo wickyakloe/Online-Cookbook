@@ -13,41 +13,33 @@
         </div>
     </div>
 </div>
-<!-- Materialize fab card -->
+<!-- The Recipe View -->
 <div class="row">
-
     <div class="card-panel">
         <div class="card-panel blue-grey darken-3">
             <header class="white-text">
-                <h4>Pancakes with blueberries</h4>
+                <h4>{{recipe.title}}</h4>
             </header>
         </div>
         <div class="row">
             <div class="col s12 m4">
                 <div class="card-image">
-                    <img class="" src="https://img.jamieoliver.com/jamieoliver/recipe-database/xtra_med/51430777.jpg?tr=w-335">
+                    <img class="" src="{{recipe.image_url}}">
                 </div>
             </div>
             <div class="col s12 m8">
                     <section class="">
                     <h5>Description:</h5>
-                    <p>
-                        These are the simplest pancakes to make with kids. You don’t even need scales to weigh out 
-                        the ingredients - all you need is a cup or a mug. As long as you use the same cup for 
-                        measuring both the flour and the milk, you’ll be laughing!
-                    </p>
+                    <p>{{recipe.description}}</p>
                     </section>
                 <div class="row">
                     <div class="col s12 m4">
                         <section>
                             <h6>Ingredients:</h6>
                             <ul>
-                                <li>1 large free-range egg</li>
-                                <li>1 cup of self-raising flour</li>
-                                <li>1 cup of milk</li>
-                                <li>200 g blueberries</li>
-                                <li>Olive oil</li>
-                                <li>4 tablespoons natural yoghurt</li>
+                                {% for ingredient in recipe.ingredients %}
+                                <li>{{ingredient}}</li>
+                                {% endfor %}
                             </ul>
                         </section>
                     </div>
@@ -55,9 +47,9 @@
                         <section>
                             <h6>Cooking-Tools:</h6>
                             <ul class="">
-                                <li>Mixing bowl</li>
-                                <li>Tablespoon</li>
-                                <li>Frying pan non-stick</li>
+                                {% for tool in recipe.cooking_tools %}
+                                <li>{{tool}}</li>
+                                {% endfor %}
                             </ul>
                         </section>
                     </div>
@@ -66,14 +58,9 @@
                     <section>
                         <h6>STEPS:</h6>
                         <ol class="">
-                            <li>Crack the egg into a large mixing bowl, add the flour, milk and a tiny pinch of sea salt.</li>
-                            <li>Whisk everything together until you have a lovely smooth batter, then fold through the blueberries.</li>
-                            <li>Heat ½ a tablespoon of olive oil in a large non-stick frying pan over a medium heat, carefully tilting the pan to spread the oil out evenly.</li>
-                            <li>Add a few ladles of batter to the pan, leaving space between each one so they have room to spread out slightly – each ladleful will make one pancake, and you’ll need to work in batches.</li>
-                            <li>Cook for 1 to 2 minutes, or until little bubbles appear on the surface and the bases are golden, then carefully flip them over.</li>
-                            <li>When the pancakes are golden on both sides, remove to a plate.</li>
-                            <li>Repeat with the remaining batter, adding a little more oil to the pan between batches, if needed.</li>
-                            <li>Serve the pancakes while they’re still hot, with a dollop of yoghurt and some extra fresh berries, if you like.</li>
+                            {% for step in recipe.steps %}
+                            <li>{{step}}</li>
+                            {% endfor %}
                         </ol>
                     </section>
                 </div>

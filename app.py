@@ -1,6 +1,8 @@
 import os
 from flask import Flask, render_template
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
+
 
 # Initialize the flask app
 app = Flask(__name__)
@@ -18,6 +20,12 @@ mongo = PyMongo(app)
 @app.route("/")
 def index():
     return render_template("index.html", recipes=mongo.db.recipe.find())
+
+
+@app.route("/view_recipe/<recipe_id>")
+def view_recipe(recipe_id):
+    the_recipe = mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)})
+    return render_template("recipe.html", recipe=the_recipe)
 
 
 @app.route("/createrecipe")
