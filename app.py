@@ -28,7 +28,7 @@ def view_recipe(recipe_id):
     return render_template("recipe.html", recipe=the_recipe)
 
 
-@app.route("/createrecipe")
+@app.route("/create_recipe")
 def create_recipe():
     return render_template("createrecipe.html")
 
