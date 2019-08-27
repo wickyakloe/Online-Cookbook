@@ -2,55 +2,90 @@
 {% block content %}
 <div class="row">
     <div class="col s4">
-    <!-- Grey navigation panel -->
-    <ul class="crudMenu">
-        <li><a href="#" class="crudMenuItem">My Recipes</a><span class="right-align chevronMenuItem chevronAlign">></span></li>
-        <li><a href="#" class="crudMenuItem crudActive">Create Recipe</a><span class="right-align chevronMenuItem crudActive">></span></li>
-        <li><a href="#" class="crudMenuItem">Edit Recipe</a><span class="right-align chevronMenuItem chevronAlign">></span></li>
-        <li><a href="#" class="crudMenuItem">Delete Recipe</a><span class="right-align chevronMenuItem">></span></li>
-    </ul>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger hide-on-med-and-up burgerIcon"><i class="material-icons">menu</i><p>Create Recipe</p></a>
+      <ul class="crudMenu hide-on-small-only">
+          <li><a href="#" class="crudMenuItem">My Recipes</a><span class="right-align chevronMenuItem chevronAlign">></span></li>
+          <li><a href="#" class="crudMenuItem crudActive">Create Recipe</a><span class="right-align chevronMenuItem chevronActive">></span></li>
+          <li><a href="#" class="crudMenuItem">Edit Recipe</a><span class="right-align chevronMenuItem chevronAlign">></span></li>
+          <li><a href="#" class="crudMenuItem">Delete Recipe</a><span class="right-align chevronMenuItem">></span></li>
+      </ul>
     </div>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="#" class="crudMenuItem">My Recipes</a></li>
+        <li><a href="#" class="crudMenuItem crudActive">Create Recipe</a></li>
+        <li><a href="#" class="crudMenuItem">Edit Recipe</a></li>
+        <li><a href="#" class="crudMenuItem">Delete Recipe</a></li>
+     </ul>
   
-    <div class="col s8">
-    <!-- Teal page content  -->
-    <div class="row valign-wrapper">
-            <div class="input-field col s6">
-              <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-              <label for="first_name">First Name</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="last_name" type="text" class="validate">
-              <label for="last_name">Last Name</label>
-            </div>
+    <div class="col s12 m8">
+      <form action="" method="POST">
+        <div class="row">        
+          <div class="input-field col s12">
+            <input id="recipe_name" name="recipe_name" type="text" class="validate">
+            <label for="recipe_name">RECIPE NAME</label>
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-              <label for="disabled">Disabled</label>
-            </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <select>
+              <option value="" disabled selected>Choose</option>
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+              <option value="3">Option 3</option>
+            </select>
+            <label>CATEGORY</label>
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="password" type="password" class="validate">
-              <label for="password">Password</label>
-            </div>
+          <div class="input-field col s6">
+            <select>
+              <option value="" disabled selected>Any</option>
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+              <option value="3">Option 3</option>
+            </select>
+            <label>CUISINE</label>
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="email" type="email" class="validate">
-              <label for="email">Email</label>
-            </div>
+        </div>
+        <div class="row">        
+          <div class="input-field col s12">
+            <input id="description" name="description" type="text" class="validate">
+            <label for="desciption">DESCRIPTION</label>
           </div>
-          <div class="row">
-            <div class="col s12">
-              This is an inline input field:
-              <div class="input-field inline">
-                <input id="email_inline" type="email" class="validate">
-                <label for="email_inline">Email</label>
-                <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
-              </div>
-            </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s3">
+            <input id="ingredients" name="ingredient1" type="text" class="validate">
+            <label for="ingredients">INGREDIENTS</label>
           </div>
+          <div class="input-field col s3">
+             <input id="ingredients" name="ingredient2" type="text" class="validate">
+          </div>
+          <div class="input-field col s2">
+              <a class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">add</i></a>
+           </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s3">
+            <input id="cooking_tools" name="cooking_tools1" type="text" class="validate">
+            <label for="cooking_tools">COOKING TOOLS</label>
+          </div>
+          <div class="input-field col s3">
+              <input id="cooking_tools" name="cooking_tools2" type="text" class="validate">
+          </div>
+          <div class="input-field col s2">
+              <a class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">add</i></a>
+          </div>
+        </div>  
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="steps" name="step1" type="text" class="validate">
+            <label for="steps">STEPS</label>
+          </div>
+          <div class="input-field col s12 center-align">
+            <a class="btn-floating btn-large waves-effect waves-light"><i class="material-icons">add</i></a>
+          </div>
+        </div>
+      </form>
     </div>
 </div>
 {% endblock %}

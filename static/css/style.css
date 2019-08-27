@@ -1,4 +1,4 @@
-/* Navbar items */
+/* Navbar items 'base.html" */
 .logoNav {
     padding-top: 5px;
     filter: brightness(0) invert(1);
@@ -26,7 +26,7 @@
     top: 0;
   }
 
-/* Menu CRUD operation pages */
+/* Side menu CRUD operation pages */
 .crudMenuItem {
     color: #C0C0C0;
     font-size: x-large;
@@ -65,4 +65,22 @@
     font-weight: bold;
     text-decoration-color: #f9a825;
     opacity: 1;
+}
+
+.chevronActive {
+    color: #f9a825;
+    font-weight: bold;
+    opacity: 1;
+}
+
+/* Burger icon position on small screen sizes */
+.burgerIcon {
+    position: absolute;
+    top: 70px;
+}
+
+.burgerIcon > p {
+    position: relative;
+    bottom: 42px;
+    left: 30px;
 }
