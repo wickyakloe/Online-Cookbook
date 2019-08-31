@@ -37,7 +37,7 @@
                         <section>
                             <h6>Ingredients:</h6>
                             <ul>
-                                {% for ingredient in recipe.ingredients %}
+                                {% for ingredient in recipe.ingredients.values() %}
                                 <li>{{ingredient}}</li>
                                 {% endfor %}
                             </ul>
@@ -47,7 +47,7 @@
                         <section>
                             <h6>Cooking-Tools:</h6>
                             <ul class="">
-                                {% for tool in recipe.cooking_tools %}
+                                {% for tool in recipe.cooking_tools.values() %}
                                 <li>{{tool}}</li>
                                 {% endfor %}
                             </ul>
@@ -58,7 +58,7 @@
                     <section>
                         <h6>STEPS:</h6>
                         <ol class="">
-                            {% for step in recipe.steps %}
+                            {% for step in recipe.steps.values() %}
                             <li>{{step}}</li>
                             {% endfor %}
                         </ol>
