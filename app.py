@@ -54,7 +54,7 @@ def insert_recipe():
             steps[stepNo] = step
 
     recipes.insert_one({
-        "recipe_name": request.form.get("recipe_name"),
+        "title": request.form.get("recipe_name"),
         "description":  request.form.get("description"),
         "ingredients": ingredients,
         "cooking_tools": cooking_tools,
