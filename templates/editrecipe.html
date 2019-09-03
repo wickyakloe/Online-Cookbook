@@ -2,55 +2,175 @@
 {% block content %}
 <div class="row">
     <div class="col s4">
-    <!-- Grey navigation panel -->
-    <ul class="crudMenu">
-        <li><a href="#" class="crudMenuItem">My Recipes</a><span class="right-align chevronMenuItem chevronAlign">></span></li>
-        <li><a href="#" class="crudMenuItem">Create Recipe</a><span class="right-align chevronMenuItem">></span></li>
-        <li><a href="#" class="crudMenuItem crudActive">Edit Recipe</a><span class="right-align chevronMenuItem chevronAlign crudActive">></span></li>
-        <li><a href="#" class="crudMenuItem">Delete Recipe</a><span class="right-align chevronMenuItem">></span></li>
-    </ul>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger hide-on-med-and-up burgerIcon"><i class="material-icons">menu</i><p>Create Recipe</p></a>
+      <ul class="crudMenu hide-on-small-only">
+          <li><a href="#" class="crudMenuItem">My Recipes</a><span class="right-align chevronMenuItem chevronAlign">></span></li>
+          <li><a href="#" class="crudMenuItem">Create Recipe</a><span class="right-align chevronMenuItem">></span></li>
+          <li><a href="#" class="crudMenuItem crudActive">Edit Recipe</a><span class="right-align chevronMenuItem chevronAlign chevronActive">></span></li>
+          <li><a href="#" class="crudMenuItem">Delete Recipe</a><span class="right-align chevronMenuItem">></span></li>
+      </ul>
     </div>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="#" class="crudMenuItem">My Recipes</a></li>
+        <li><a href="#" class="crudMenuItem crudActive">Create Recipe</a></li>
+        <li><a href="#" class="crudMenuItem">Edit Recipe</a></li>
+        <li><a href="#" class="crudMenuItem">Delete Recipe</a></li>
+     </ul>
   
-    <div class="col s8">
-    <!-- Teal page content  -->
-    <div class="row valign-wrapper">
-            <div class="input-field col s6">
-              <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-              <label for="first_name">First Name</label>
-            </div>
-            <div class="input-field col s6">
-              <input id="last_name" type="text" class="validate">
-              <label for="last_name">Last Name</label>
-            </div>
+    <div class="col s12 m8">
+      <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method="POST">
+        <div class="row">        
+          <div class="input-field col s12">
+            <input id="recipe_name" name="recipe_name" type="text" class="validate" value="{{recipe.title}}">
+            <label for="recipe_name">RECIPE NAME</label>
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input disabled value="I am not editable" id="disabled" type="text" class="validate">
-              <label for="disabled">Disabled</label>
-            </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <select>
+              <option value="" disabled selected>Choose</option>
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+              <option value="3">Option 3</option>
+            </select>
+            <label>CATEGORY</label>
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="password" type="password" class="validate">
-              <label for="password">Password</label>
-            </div>
+          <div class="input-field col s6">
+            <select>
+              <option value="" disabled selected>Any</option>
+              <option value="1">Option 1</option>
+              <option value="2">Option 2</option>
+              <option value="3">Option 3</option>
+            </select>
+            <label>CUISINE</label>
           </div>
-          <div class="row">
-            <div class="input-field col s12">
-              <input id="email" type="email" class="validate">
-              <label for="email">Email</label>
-            </div>
+        </div>
+        <div class="row">        
+          <div class="input-field col s12">
+            <input id="description" name="description" type="text" class="validate" value="{{recipe.description}}">
+            <label for="desciption">DESCRIPTION</label>
           </div>
-          <div class="row">
-            <div class="col s12">
-              This is an inline input field:
-              <div class="input-field inline">
-                <input id="email_inline" type="email" class="validate">
-                <label for="email_inline">Email</label>
-                <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
-              </div>
-            </div>
+        </div>
+        <label for="ingredient1">INGREDIENTS</label>
+        <div class="row">
+          {% for ingredientNo, ingredient in recipe.ingredients.items() %}
+          <div class="input-field col s3 {{ingredientNo}}">
+            <input id="{{ingredientNo}}" name="{{ingredientNo}}" type="text" class="validate ingredient" value="{{ingredient}}">
           </div>
+          {% endfor %}
+          <div class="input-field col s2">
+              <a class="btn-floating waves-effect waves-light" onclick="addIngredient()"><i class="material-icons">add</i></a>
+              <a class="btn-floating waves-effect waves-light red" onclick="removeLastIngredient()"><i class="material-icons">delete</i></a>
+           </div>
+        </div>
+        <label for="cooking_tool1">COOKING TOOLS</label>
+        <div class="row">
+          {% for toolNo, tool in recipe.cooking_tools.items() %}
+          <div class="input-field col s3 {{toolNo}}">
+            <input id="{{toolNo}}" name="{{toolNo}}" type="text" class="validate cooking_tool" value="{{tool}}">    
+          </div>
+          {% endfor %}
+          <div class="input-field col s2">
+            <a class="btn-floating waves-effect waves-light" onclick="addTool()"><i class="material-icons">add</i></a>
+            <a class="btn-floating waves-effect waves-light red" onclick="removeLastTool()"><i class="material-icons">delete</i></a>
+          </div>
+        </div>
+        <label for="step1">STEPS</label>
+        <div class="row">
+          {% for stepNo, step in recipe.steps.items() %}
+          <div class="input-field col s12 {{stepNo}}">
+            <span class="prefix">{{stepNo[4]}}</span>
+            <input id="{{stepNo}}" name="{{stepNo}}" type="text" class="validate" value="{{step}}">
+          </div>
+          {% endfor %}
+          <div class="input-field col s12 center-align">
+            <a class="btn-floating waves-effect waves-light" onclick="addStep()"><i class="material-icons">add</i></a>
+            <a class="btn-floating waves-effect waves-light red" onclick="removeLastStep()"><i class="material-icons">delete</i></a>
+          </div>
+        </div>
+        <div class="row">
+            <button class="btn waves-effect waves-light" type="submit" name="action">Update Recipe
+              <i class="material-icons right">playlist_add</i>
+            </button>
+          </div>
+      </form>
     </div>
 </div>
+
+<script>
+  function addIngredient(){
+    let i = parseInt($(".ingredient:last").attr('id').slice(10))
+    if(i == 1){
+      i++
+      $(`<div class="input-field col s3 ingredient${i}">
+            <input id="ingredient${i}" name="ingredient${i}" type="text" class="validate ingredient">
+          </div>`).insertAfter(`.ingredient${i-1}`)
+      $('<a class="btn-floating waves-effect waves-light red" onclick="removeLastIngredient()"><i class="material-icons">delete</i></a>').insertAfter("a[onclick='addIngredient()']")
+    } else{
+      i++
+      $(`<div class="input-field col s3 ingredient${i}">
+            <input id="ingredient${i}" name="ingredient${i}" type="text" class="validate ingredient">
+          </div>`).insertAfter(`.ingredient${i-1}`)
+      }
+  }
+
+  function removeLastIngredient(){
+    let i = parseInt($(".ingredient:last").attr('id').slice(10))
+    if(i == 2){
+      $(`.ingredient${i}`).remove()
+      $("a[onclick='removeLastIngredient()']").remove()
+    } else{
+      $(`.ingredient${i}`).remove()
+    }
+  }
+
+  function addTool(){
+    let i = parseInt($(".cooking_tool:last").attr('id').slice(12))
+    if(i == 1){
+      i++
+      $(`<div class="input-field col s3 cooking_tool${i}">
+            <input id="cooking_tool${i}" name="cooking_tool${i}" type="text" class="validate cooking_tool">
+          </div>`).insertAfter(`.cooking_tool${i-1}`)
+      $('<a class="btn-floating waves-effect waves-light red" onclick="removeLastTool()"><i class="material-icons">delete</i></a>').insertAfter("a[onclick='addTool()']")
+    } else{
+      i++
+      $(`<div class="input-field col s3 cooking_tool${i}">
+            <input id="cooking_tool${i}" name="cooking_tool${i}" type="text" class="validate cooking_tool">
+          </div>`).insertAfter(`.cooking_tool${i-1}`)
+      }
+  }
+
+  function removeLastTool(){
+    let i = parseInt($(".cooking_tool:last").attr('id').slice(12))
+    if(i == 2){
+      $(`.cooking_tool${i}`).remove()
+      $("a[onclick='removeLastTool()']").remove()
+    } else{
+      $(`.cooking_tool${i}`).remove()
+    }
+  }
+
+  function addStep(){
+    let i = parseInt($(".prefix:last").html())
+    if(i == 1){
+      i++
+      $(`<div class="input-field col s12 step${i}"><span class="prefix">${i}</span><input id="step${i}" name="step${i}" type="text" class="validate"></div>`).insertAfter(`.step${i-1}`)
+      $('<a class="btn-floating btn-large waves-effect waves-light red" onclick="removeLastStep()"><i class="material-icons">delete</i></a>').insertAfter("a[onclick='addStep()']")
+    } else{
+      i++
+      $(`<div class="input-field col s12 step${i}"><span class="prefix">${i}</span><input id="step${i}" name="step${i}" type="text" class="validate"></div>`).insertAfter(`.step${i-1}`)
+    }
+  }
+
+  function removeLastStep(){
+    let i = parseInt($(".prefix:last").html())
+    if(i == 2){
+      $(`.step${i}`).remove()
+      $("a[onclick='removeLastStep()']").remove()
+    } else{
+      $(`.step${i}`).remove()
+    }
+  }
+</script>
 {% endblock %}
