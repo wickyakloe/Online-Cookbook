@@ -64,9 +64,42 @@ def insert_recipe():
     return redirect(url_for("index"))
 
 
-@app.route("/editrecipe")
-def edit_recipe():
-    return render_template("editrecipe.html")
+@app.route("/edit_recipe/<recipe_id>")
+def edit_recipe(recipe_id):
+    the_recipe = mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)})
+    return render_template("editrecipe.html", recipe=the_recipe)
+
+
+@app.route("/update_recipe/<recipe_id>", methods=["POST"])
+def update_recipe(recipe_id):
+    recipe = mongo.db.recipe
+    updated_recipe = request.form.to_dict()
+    # Get all ingredients and put in dict
+    ingredients = {}
+    for ingredientNo, ingredient in updated_recipe.items():
+        if "ingredient" in ingredientNo:
+            ingredients[ingredientNo] = ingredient
+    # Get all cooking_tools and put in dict
+    cooking_tools = {}
+    for cooking_toolNo, cooking_tool in updated_recipe.items():
+        if "cooking_tool" in cooking_toolNo:
+            cooking_tools[cooking_toolNo] = cooking_tool
+    # Get all steps and put in dict
+    steps = {}
+    for stepNo, step in updated_recipe.items():
+        if "step" in stepNo:
+            steps[stepNo] = step
+
+    recipe.update(
+        {"_id": ObjectId(recipe_id)},
+        {
+            "title": request.form.get("recipe_name"),
+            "description":  request.form.get("description"),
+            "ingredients": ingredients,
+            "cooking_tools": cooking_tools,
+            "steps": steps
+        })
+    return redirect(url_for("index"))
 
 
 if __name__ == "__main__":
