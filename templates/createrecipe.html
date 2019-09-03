@@ -19,7 +19,7 @@
      </ul>
   
     <div class="col s12 m8">
-      <form action="{{ url_for('insert_recipe') }}" method="POST">
+      <form action="{{ url_for('insert_recipe') }}" method="POST" enctype="multipart/form-data">
         <div class="row">        
           <div class="input-field col s12">
             <input id="recipe_name" name="recipe_name" type="text" class="validate">
@@ -44,6 +44,17 @@
               <option value="3">Option 3</option>
             </select>
             <label>CUISINE</label>
+          </div>
+        </div>
+        <div class="row">        
+          <div class="file-field input-field">
+            <div class="btn">
+              <span>Image</span>
+              <input type="file" name="image">
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text">
+            </div>
           </div>
         </div>
         <div class="row">        
