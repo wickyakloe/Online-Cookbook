@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from flask_uploads import UploadSet, configure_uploads, IMAGES
 
 
 # Initialize the flask app
@@ -9,12 +10,20 @@ app = Flask(__name__)
 
 # Get mongodb URI form env variable
 MONGODB_URI = os.getenv("MONGO_URI")
+
 # Set the DB name
 app.config["MONGO_DBNAME"] = "online_cookbook"
+
 # Set the Mongo URI
 app.config["MONGO_URI"] = MONGODB_URI
+
 # Initialize MongoDB as mongo variable
 mongo = PyMongo(app)
+
+# Flask uploads settings
+images = UploadSet("images", IMAGES)
+app.config['UPLOADED_IMAGES_DEST'] = 'static/media'
+configure_uploads(app, images)
 
 
 @app.route("/")
@@ -53,14 +62,18 @@ def insert_recipe():
         if "step" in stepNo:
             steps[stepNo] = step
 
+    # Use Flask Uploads to save image
+    if request.method == "POST" and "image" in request.files:
+        filename = images.save(request.files["image"])
+
     recipes.insert_one({
         "title": request.form.get("recipe_name"),
+        "image": filename,
         "description":  request.form.get("description"),
         "ingredients": ingredients,
         "cooking_tools": cooking_tools,
         "steps": steps
     })
-
     return redirect(url_for("index"))
 
 
@@ -89,12 +102,16 @@ def update_recipe(recipe_id):
     for stepNo, step in updated_recipe.items():
         if "step" in stepNo:
             steps[stepNo] = step
+    # Use Flask Uploads to save image
+    if request.method == "POST" and "image" in request.files:
+        filename = images.save(request.files["image"])
 
     recipe.update(
         {"_id": ObjectId(recipe_id)},
         {
             "title": request.form.get("recipe_name"),
             "description":  request.form.get("description"),
+            "image": filename,
             "ingredients": ingredients,
             "cooking_tools": cooking_tools,
             "steps": steps
