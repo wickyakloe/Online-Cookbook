@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+    <div class="col s4">
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger hide-on-med-and-up burgerIcon"><i class="material-icons">menu</i><p>Create Recipe</p></a>
+      <ul class="crudMenu hide-on-small-only">
+          <li><a href="#" class="crudMenuItem crudActive">My Recipes</a><span class="right-align chevronMenuItem chevronAlign chevronActive">></span></li>
+          <li><a href="#" class="crudMenuItem">Create Recipe</a><span class="right-align chevronMenuItem">></span></li>
+          <li><a href="#" class="crudMenuItem">Edit Recipe</a><span class="right-align chevronMenuItem chevronAlign">></span></li>
+          <li><a href="#" class="crudMenuItem">Delete Recipe</a><span class="right-align chevronMenuItem">></span></li>
+      </ul>
+    </div>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="#" class="crudMenuItem">My Recipes</a></li>
+        <li><a href="#" class="crudMenuItem crudActive">Create Recipe</a></li>
+        <li><a href="#" class="crudMenuItem">Edit Recipe</a></li>
+        <li><a href="#" class="crudMenuItem">Delete Recipe</a></li>
+     </ul>
+
+    <div class="col s12 m8">
+        {% for recipe in recipes %}
+        <div class="col s12 m4">
+            <div class="card medium">
+                <div class="card-image">
+                    <img class="materialboxed" src="static/media/{{recipe.image}}">
+                    <span class="card-title">
+                        <strong class="blue-grey darken-3">{{recipe.title}}</strong>
+                    </span>
+                </div>
+                <div class="card-content">
+                    <p>{{recipe.description}}</p>
+                </div>
+                <div class="card-action">
+                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}"><strong>View</strong></a>
+                    <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}"><strong>Edit</strong></a>
+                    <a href="#"><strong>Delete</strong></a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
