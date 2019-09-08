@@ -33,30 +33,6 @@
         </div>
     </div>
     {% endfor %}
-    <!-- <div class="col s12 m4">
-        <div class="card">
-            <div class="card-image">
-                <img src="static/media/0402-chef_48.png">
-                <span class="card-title">Card Title</span>
-                <a class="btn-floating halfway-fab waves-effect waves-light yellow darken-3"><i class="material-icons">assignment</i></a>
-            </div>
-            <div class="card-content">
-                <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-            </div>
-        </div>
-    </div>
-    <div class="col s12 m4">
-        <div class="card">
-            <div class="card-image">
-                <img src="static/media/0402-chef_48.png">
-                <span class="card-title">Card Title</span>
-                <a class="btn-floating halfway-fab waves-effect waves-light yellow darken-3"><i class="material-icons">assignment</i></a>
-            </div>
-            <div class="card-content">
-                <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
-            </div>
-        </div>
-    </div> -->
 </div>
 
 <!-- Modal Structure -->
@@ -69,8 +45,8 @@
                 <label for="icon_prefix">Enter a unique username</label>
                 <span class="helper-text" data-error="wrong" data-success="right">Helper text</span>
         </div>
-        <button class="btn waves-effect waves-light" type="submit" name="action">Submit<i class="material-icons right">send</i>
-        </button>
+        <a href="{{ url_for('create_recipe') }}" class="btn waves-effect waves-light" type="submit" name="action">Submit<i class="material-icons right">send</i>
+        </a>
     </div>
 </div>
 {% endblock %}
