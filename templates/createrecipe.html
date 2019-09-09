@@ -27,20 +27,20 @@
         </div>
         <div class="row">
           <div class="input-field col s6">
-            <select>
+            <select id="category" name="category_name">
               <option value="" disabled selected>Choose</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
+              {% for cat in categories %}
+              <option value="{{cat.name}}">{{cat.name}}</option>
+              {% endfor %}
             </select>
             <label>CATEGORY</label>
           </div>
           <div class="input-field col s6">
-            <select>
+            <select id="cuisine" name="cuisine_name">
               <option value="" disabled selected>Any</option>
-              <option value="1">Option 1</option>
-              <option value="2">Option 2</option>
-              <option value="3">Option 3</option>
+              {% for cuisine in cuisines %}
+              <option value="{{cuisine.name}}">{{cuisine.name}}</option>
+              {% endfor %}
             </select>
             <label>CUISINE</label>
           </div>
