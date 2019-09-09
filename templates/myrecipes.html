@@ -4,8 +4,8 @@
     <div class="col s4">
       <a href="#" data-target="mobile-demo" class="sidenav-trigger hide-on-med-and-up burgerIcon"><i class="material-icons">menu</i><p>Create Recipe</p></a>
       <ul class="crudMenu hide-on-small-only">
-          <li><a href="#" class="crudMenuItem crudActive">My Recipes</a><span class="right-align chevronMenuItem chevronAlign chevronActive">></span></li>
-          <li><a href="#" class="crudMenuItem">Create Recipe</a><span class="right-align chevronMenuItem">></span></li>
+          <li><a href="{{ url_for('my_recipes') }}" class="crudMenuItem crudActive">My Recipes</a><span class="right-align chevronMenuItem chevronAlign chevronActive">></span></li>
+          <li><a href="{{ url_for('create_recipe')}}" class="crudMenuItem">Create Recipe</a><span class="right-align chevronMenuItem">></span></li>
           <li><a href="#" class="crudMenuItem">Edit Recipe</a><span class="right-align chevronMenuItem chevronAlign">></span></li>
           <li><a href="#" class="crudMenuItem">Delete Recipe</a><span class="right-align chevronMenuItem">></span></li>
       </ul>
@@ -32,9 +32,18 @@
                     <p>{{recipe.description}}</p>
                 </div>
                 <div class="card-action">
-                    <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}"><strong>View</strong></a>
-                    <a href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}"><strong>Edit</strong></a>
-                    <a href="#"><strong>Delete</strong></a>
+                    <a class="btn" href="{{ url_for('view_recipe', recipe_id=recipe._id) }}"><i class="material-icons">visibility</i></a>
+                    <a class="btn yellow darken-3" href="{{ url_for('edit_recipe', recipe_id=recipe._id) }}"><i class="material-icons">edit</i></a>
+                    <a class="modal-trigger btn red" href="#{{recipe.title}}"><i class="material-icons">delete</i></a>
+                </div>
+                <div id="{{recipe.title}}" class="modal">
+                    <div class="modal-content">
+                        <h5>Are you sure you want to DELETE this recipe?</h5>
+                        <h5>{{recipe.title}}</h5>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="{{ url_for('delete_recipe', recipe_id=recipe._id) }}"" class="modal-close waves-effect waves-green btn-flat">DELETE</a>
+                    </div>
                 </div>
             </div>
         </div>

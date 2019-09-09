@@ -4,8 +4,8 @@
     <div class="col s4">
       <a href="#" data-target="mobile-demo" class="sidenav-trigger hide-on-med-and-up burgerIcon"><i class="material-icons">menu</i><p>Create Recipe</p></a>
       <ul class="crudMenu hide-on-small-only">
-          <li><a href="#" class="crudMenuItem">My Recipes</a><span class="right-align chevronMenuItem chevronAlign">></span></li>
-          <li><a href="#" class="crudMenuItem crudActive">Create Recipe</a><span class="right-align chevronMenuItem chevronActive">></span></li>
+          <li><a href="{{ url_for('my_recipes') }}" class="crudMenuItem">My Recipes</a><span class="right-align chevronMenuItem chevronAlign">></span></li>
+          <li><a href="{{ url_for('create_recipe')}}" class="crudMenuItem crudActive">Create Recipe</a><span class="right-align chevronMenuItem chevronActive">></span></li>
           <li><a href="#" class="crudMenuItem">Edit Recipe</a><span class="right-align chevronMenuItem chevronAlign">></span></li>
           <li><a href="#" class="crudMenuItem">Delete Recipe</a><span class="right-align chevronMenuItem">></span></li>
       </ul>
