@@ -2,8 +2,13 @@ import os
 from flask import Flask, render_template, request, redirect, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from dotenv import load_dotenv
+# Remove this and link to img url
 from flask_uploads import UploadSet, configure_uploads, IMAGES
 
+
+# Load the dotenv file
+load_dotenv()
 
 # Initialize the flask app
 app = Flask(__name__)
