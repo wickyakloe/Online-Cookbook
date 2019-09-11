@@ -67,9 +67,9 @@
         </div>
         <label for="ingredient1">INGREDIENTS</label>
         <div class="row">
-          {% for ingredientNo, ingredient in recipe.ingredients.items() %}
-          <div class="input-field col s3 {{ingredientNo}}">
-            <input id="{{ingredientNo}}" name="{{ingredientNo}}" type="text" class="validate ingredient" value="{{ingredient}}">
+          {% for ingredient in recipe.ingredients %}
+          <div class="input-field col s3 ingredient{{loop.index}}">
+            <input id="ingredient{{loop.index}}" name="ingredient{{loop.index}}" type="text" class="validate ingredient" value="{{ingredient}}">
           </div>
           {% endfor %}
           <div class="input-field col s2">
@@ -79,9 +79,9 @@
         </div>
         <label for="cooking_tool1">COOKING TOOLS</label>
         <div class="row">
-          {% for toolNo, tool in recipe.cooking_tools.items() %}
-          <div class="input-field col s3 {{toolNo}}">
-            <input id="{{toolNo}}" name="{{toolNo}}" type="text" class="validate cooking_tool" value="{{tool}}">    
+          {% for tool in recipe.cooking_tools %}
+          <div class="input-field col s3 cooking_tool{{loop.index}}">
+            <input id="cooking_tool{{loop.index}}" name="{cooking_tool{{loop.index}}" type="text" class="validate cooking_tool" value="{{tool}}">    
           </div>
           {% endfor %}
           <div class="input-field col s2">
@@ -91,10 +91,10 @@
         </div>
         <label for="step1">STEPS</label>
         <div class="row">
-          {% for stepNo, step in recipe.steps.items() %}
-          <div class="input-field col s12 {{stepNo}}">
-            <span class="prefix">{{stepNo[4:]}}</span>
-            <input id="{{stepNo}}" name="{{stepNo}}" type="text" class="validate" value="{{step}}">
+          {% for step in recipe.steps %}
+          <div class="input-field col s12 step{{loop.index}}">
+            <span class="prefix">{{loop.index}}</span>
+            <input id="step{{loop.index}}" name="step{{loop.index}}" type="text" class="validate" value="{{step}}">
           </div>
           {% endfor %}
           <div class="input-field col s12 center-align">

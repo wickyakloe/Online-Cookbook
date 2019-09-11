@@ -51,22 +51,13 @@ def create_recipe():
 def insert_recipe():
     recipes = mongo.db.recipe
     new_recipe = request.form.to_dict()
-    # Get all ingredients and put in dict
-    ingredients = {}
-    for ingredientNo, ingredient in new_recipe.items():
-        if "ingredient" in ingredientNo:
-            ingredients[ingredientNo] = ingredient
-    # Get all cooking_tools and put in dict
-    cooking_tools = {}
-    for cooking_toolNo, cooking_tool in new_recipe.items():
-        if "cooking_tool" in cooking_toolNo:
-            cooking_tools[cooking_toolNo] = cooking_tool
-    # Get all steps and put in dict
-    steps = {}
-    for stepNo, step in new_recipe.items():
-        if "step" in stepNo:
-            steps[stepNo] = step
 
+    # Get all ingredients,cooking tools and steps and put in list
+    ingredients = [v for k, v in new_recipe.items() if "ingredient" in k]
+    cooking_tools = [v for k, v in new_recipe.items() if "cooking_tool" in k]
+    steps = [v for k, v in new_recipe.items() if "step" in k]
+
+    # Insert in database
     recipes.insert_one({
         "title": request.form.get("recipe_name"),
         "category": request.form.get("category_name"),
@@ -92,21 +83,12 @@ def edit_recipe(recipe_id):
 def update_recipe(recipe_id):
     recipe = mongo.db.recipe
     updated_recipe = request.form.to_dict()
-    # Get all ingredients and put in dict
-    ingredients = {}
-    for ingredientNo, ingredient in updated_recipe.items():
-        if "ingredient" in ingredientNo:
-            ingredients[ingredientNo] = ingredient
-    # Get all cooking_tools and put in dict
-    cooking_tools = {}
-    for cooking_toolNo, cooking_tool in updated_recipe.items():
-        if "cooking_tool" in cooking_toolNo:
-            cooking_tools[cooking_toolNo] = cooking_tool
-    # Get all steps and put in dict
-    steps = {}
-    for stepNo, step in updated_recipe.items():
-        if "step" in stepNo:
-            steps[stepNo] = step
+
+    # Get all ingredients,cooking tools and steps and put in list
+    ingredients = [v for k, v in updated_recipe.items() if "ingredient" in k]
+    cooking_tools = [v for k, v in updated_recipe.items()
+                     if "cooking_tool" in k]
+    steps = [v for k, v in updated_recipe.items() if "step" in k]
 
     recipe.update(
         {"_id": ObjectId(recipe_id)},
