@@ -3,8 +3,6 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from dotenv import load_dotenv
-# Remove this and link to img url
-from flask_uploads import UploadSet, configure_uploads, IMAGES
 
 
 # Load the dotenv file
@@ -25,11 +23,6 @@ app.config["MONGO_URI"] = MONGODB_URI
 # Initialize MongoDB as mongo variable
 mongo = PyMongo(app)
 
-# Flask uploads settings
-images = UploadSet("images", IMAGES)
-app.config['UPLOADED_IMAGES_DEST'] = 'static/media'
-configure_uploads(app, images)
-
 
 @app.route("/")
 def index():
@@ -49,7 +42,9 @@ def my_recipes():
 
 @app.route("/create_recipe")
 def create_recipe():
-    return render_template("createrecipe.html", categories=mongo.db.category.find(), cuisines=mongo.db.cuisine.find())
+    return render_template("createrecipe.html",
+                           categories=mongo.db.category.find(),
+                           cuisines=mongo.db.cuisine.find())
 
 
 @app.route("/insert_recipe", methods=["POST"])
@@ -72,15 +67,11 @@ def insert_recipe():
         if "step" in stepNo:
             steps[stepNo] = step
 
-    # Use Flask Uploads to save image
-    if request.method == "POST" and "image" in request.files:
-        filename = images.save(request.files["image"])
-
     recipes.insert_one({
         "title": request.form.get("recipe_name"),
         "category": request.form.get("category_name"),
         "cuisine": request.form.get("cuisine_name"),
-        "image": filename,
+        "image_url": request.form.get("image_url"),
         "description":  request.form.get("description"),
         "ingredients": ingredients,
         "cooking_tools": cooking_tools,
@@ -92,7 +83,9 @@ def insert_recipe():
 @app.route("/edit_recipe/<recipe_id>")
 def edit_recipe(recipe_id):
     the_recipe = mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)})
-    return render_template("editrecipe.html", recipe=the_recipe, categories=mongo.db.category.find(), cuisines=mongo.db.cuisine.find())
+    return render_template("editrecipe.html", recipe=the_recipe,
+                           categories=mongo.db.category.find(),
+                           cuisines=mongo.db.cuisine.find())
 
 
 @app.route("/update_recipe/<recipe_id>", methods=["POST"])
@@ -114,9 +107,6 @@ def update_recipe(recipe_id):
     for stepNo, step in updated_recipe.items():
         if "step" in stepNo:
             steps[stepNo] = step
-    # Use Flask Uploads to save image
-    if request.method == "POST" and "image" in request.files:
-        filename = images.save(request.files["image"])
 
     recipe.update(
         {"_id": ObjectId(recipe_id)},
@@ -125,7 +115,7 @@ def update_recipe(recipe_id):
             "description":  request.form.get("description"),
             "category": request.form.get("category_name"),
             "cuisine": request.form.get("cuisine_name"),
-            "image": filename,
+            "image_url": request.form.get("image_url"),
             "ingredients": ingredients,
             "cooking_tools": cooking_tools,
             "steps": steps
