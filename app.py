@@ -38,6 +38,19 @@ class User(UserMixin):
         self.id = id
 
 
+@app.route("/user_signup", methods=["POST"])
+def user_signup():
+    user = mongo.db.user
+
+    user.insert_one({
+        "username": request.form.get("username"),
+        "country": request.form.get("country"),
+        "password": request.form.get("password")
+    })
+
+    return redirect(url_for("create_recipe"))
+
+
 @app.route("/")
 def index():
     return render_template("index.html", recipes=mongo.db.recipe.find())
