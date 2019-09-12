@@ -1,4 +1,5 @@
 import os
+import datetime
 from flask import Flask, render_template, request, redirect, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
@@ -59,6 +60,7 @@ def insert_recipe():
 
     # Insert in database
     recipes.insert_one({
+        "date_updated": datetime.datetime.utcnow(),
         "title": request.form.get("recipe_name"),
         "category": request.form.get("category_name"),
         "cuisine": request.form.get("cuisine_name"),
@@ -93,6 +95,7 @@ def update_recipe(recipe_id):
     recipe.update(
         {"_id": ObjectId(recipe_id)},
         {
+            "date_updated": datetime.datetime.utcnow(),
             "title": request.form.get("recipe_name"),
             "description":  request.form.get("description"),
             "category": request.form.get("category_name"),
