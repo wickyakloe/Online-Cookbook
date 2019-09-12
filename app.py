@@ -1,6 +1,7 @@
 import os
 import datetime
-from flask import Flask, render_template, request, redirect, url_for
+from flask_login import LoginManager, UserMixin
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from dotenv import load_dotenv
@@ -11,6 +12,9 @@ load_dotenv()
 
 # Initialize the flask app
 app = Flask(__name__)
+
+# Set the secret key
+app.secret_key = os.getenv("SECRET_KEY")
 
 # Get mongodb URI form env variable
 MONGODB_URI = os.getenv("MONGO_URI")
@@ -23,6 +27,15 @@ app.config["MONGO_URI"] = MONGODB_URI
 
 # Initialize MongoDB as mongo variable
 mongo = PyMongo(app)
+
+# Flask-Login LoginManager
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+class User(UserMixin):
+    def __init__(self, id):
+        self.id = id
 
 
 @app.route("/")
