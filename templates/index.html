@@ -38,6 +38,33 @@
 <!-- Modal Login Structure -->
 <div id="modal1" class="modal">
     <div class="modal-content">
+        <h4>Login</h4>
+        <form action="{{ url_for('login') }}" method="POST">
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">lock_outline</i>
+                    <input id="username" type="text">
+                    <label for="username">Username</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">lock_outline</i>
+                    <input id="password" type="password">
+                    <label for="password">Password</label>
+                </div>
+            </div>
+            <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                <i class="material-icons right">send</i>
+            </button>
+            <a href="#!" class="waves-effect waves-light" onclick="closeModal()">Register</a>
+        </form>
+    </div>
+</div>
+
+<!-- Modal Sign-Up Structure -->
+<div id="modal2" class="modal">
+    <div class="modal-content">
         <h4>Start creating your recipe now!</h4>
         <form action="{{ url_for('user_signup')}}" method="POST">
             <div class="input-field col s3">
@@ -66,4 +93,11 @@
         </form>
     </div>
 </div>
+
+<script>
+        function closeModal(){
+          $('#modal1').modal('close');
+          $('#modal2').modal('open');
+        }
+</script>
 {% endblock %}
