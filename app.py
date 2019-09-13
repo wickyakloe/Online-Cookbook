@@ -1,11 +1,14 @@
 import os
 import datetime
-from flask_login import LoginManager, UserMixin
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask_login import LoginManager, current_user, login_required, login_user
+from flask import Flask, render_template, request, redirect, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from dotenv import load_dotenv
-
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField
+from wtforms.validators import DataRequired
 
 # Load the dotenv file
 load_dotenv()
@@ -33,19 +36,73 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 
 
-class User(UserMixin):
-    def __init__(self, id):
-        self.id = id
+# WTForm
+class LoginForm(FlaskForm):
+    """Login form to access writing and settings pages"""
+
+    username = StringField('Username', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+
+
+# User model for Flask-Login
+class User():
+
+    def __init__(self, username):
+        self.username = username
+        self.email = None
+
+    def is_authenticated(self):
+        return True
+
+    def is_active(self):
+        return True
+
+    def is_anonymous(self):
+        return False
+
+    def get_id(self):
+        return self.username
+
+    @staticmethod
+    def validate_login(password_hash, password):
+        return check_password_hash(password_hash, password)
+
+
+@login_manager.user_loader
+def load_user(username):
+    u = mongo.db.user.find_one({"_id": username})
+    if not u:
+        return None
+    return User(u['_id'])
+
+
+@app.route("/login", methods=["POST"])
+def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("my_recipes"))
+
+    form = LoginForm()
+    if request.method == "POST" and form.validate_on_submit():
+        username = mongo.db.user.find_one({"_id": form.username.data})
+        if username and User.validate_login(username["password"],
+                                            form.password.data):
+            user_obj = User(username["_id"])
+            login_user(user_obj)
+            return redirect(request.args.get("next") or url_for("my_recipes"))
+
+    return render_template("login.html", form=form)
 
 
 @app.route("/user_signup", methods=["POST"])
 def user_signup():
     user = mongo.db.user
+    password = request.form.get("password")
+    hashPass = generate_password_hash(password)
 
     user.insert_one({
-        "username": request.form.get("username"),
+        "_id": request.form.get("username"),
         "country": request.form.get("country"),
-        "password": request.form.get("password")
+        "password": hashPass
     })
 
     return redirect(url_for("create_recipe"))
@@ -68,6 +125,7 @@ def my_recipes():
 
 
 @app.route("/create_recipe")
+@login_required
 def create_recipe():
     return render_template("createrecipe.html",
                            categories=mongo.db.category.find(),
