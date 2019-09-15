@@ -6,7 +6,7 @@
         <p>To start creating your recipe now!</p>
     </div>
 </div>
-<form action="{{url_for('login')}}" method="POST" name="form">
+<form action="{{url_for('register')}}" method="POST" name="form">
     <div class="row">
         <!-- WTForm CSRF token -->
             {{ form.csrf_token() }}
@@ -19,6 +19,20 @@
     <div class="row">
         <div class="input-field col s12 m6 offset-m3">
             <i class="material-icons prefix">lock_outline</i>
+            {{ form.display_name }}
+            <label for="display_name">Display Name</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12 m6 offset-m3">
+            <i class="material-icons prefix">lock_outline</i>
+            {{ form.country }}
+            <label for="country">Country</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="input-field col s12 m6 offset-m3">
+            <i class="material-icons prefix">lock_outline</i>
             {{ form.password }}
             <label for="password">Password</label>
         </div>
@@ -26,15 +40,15 @@
     <div class="row center-align">
         <div class="col s12 m6 offset-m3">
             <button class="btn waves-effect waves-light" type="submit" name="action">
-                LOGIN<i class="material-icons right">send</i>
+                Register<i class="material-icons right">send</i>
             </button>
 
         </div>
     </div>
     <div class="row center-align">
-            <div class="col s12 m6 offset-m3">
-                <a href="{{ url_for('register') }}"><u>I dont't have an account > Register</u><a>              
-            </div>
+        <div class="col s12 m6 offset-m3">
+            <a href="{{ url_for('login') }}"><u>I already have an account > Login</u><a>              
         </div>
+    </div>
 </form>
 {% endblock %}

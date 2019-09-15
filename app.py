@@ -7,7 +7,7 @@ from bson.objectid import ObjectId
 from dotenv import load_dotenv
 from werkzeug.security import generate_password_hash
 from user import User
-from form import LoginForm
+from form import LoginForm, RegisterForm
 
 # Load the dotenv file
 load_dotenv()
@@ -56,19 +56,21 @@ def login():
     return render_template("login.html", form=form)
 
 
-@app.route("/user_signup", methods=["POST"])
-def user_signup():
+@app.route("/register", methods=["GET", "POST"])
+def register():
     user = mongo.db.user
-    password = request.form.get("password")
-    hashPass = generate_password_hash(password)
-
-    user.insert_one({
-        "_id": request.form.get("username"),
-        "country": request.form.get("country"),
-        "password": hashPass
-    })
-
-    return redirect(url_for("create_recipe"))
+    form = RegisterForm()
+    if request.method == "POST" and form.validate_on_submit:
+        password = request.form.get("password")
+        hashPass = generate_password_hash(password)
+        user.insert_one({
+            "_id": request.form.get("username"),
+            "display_name": request.form.get("display_name"),
+            "country": request.form.get("country"),
+            "password": hashPass
+            })
+        return redirect(url_for("create_recipe"))
+    return render_template("register.html", form=form)
 
 
 @app.route("/")
