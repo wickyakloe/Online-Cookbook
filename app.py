@@ -5,10 +5,9 @@ from flask import Flask, render_template, request, redirect, url_for
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from dotenv import load_dotenv
-from werkzeug.security import generate_password_hash, check_password_hash
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField
-from wtforms.validators import DataRequired
+from werkzeug.security import generate_password_hash
+from user import User
+from form import LoginForm
 
 # Load the dotenv file
 load_dotenv()
@@ -19,61 +18,25 @@ app = Flask(__name__)
 # Set the secret key
 app.secret_key = os.getenv("SECRET_KEY")
 
-# Get mongodb URI form env variable
-MONGODB_URI = os.getenv("MONGO_URI")
-
 # Set the DB name
-app.config["MONGO_DBNAME"] = "online_cookbook"
+app.config["MONGO_DBNAME"] = os.getenv("DBNAME")
 
 # Set the Mongo URI
-app.config["MONGO_URI"] = MONGODB_URI
+app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 
 # Initialize MongoDB as mongo variable
 mongo = PyMongo(app)
 
 # Flask-Login LoginManager
-login_manager = LoginManager()
-login_manager.init_app(app)
-
-
-# WTForm
-class LoginForm(FlaskForm):
-    """Login form to access writing and settings pages"""
-
-    username = StringField('Username', validators=[DataRequired()])
-    password = PasswordField('Password', validators=[DataRequired()])
-
-
-# User model for Flask-Login
-class User():
-
-    def __init__(self, username):
-        self.username = username
-        self.email = None
-
-    def is_authenticated(self):
-        return True
-
-    def is_active(self):
-        return True
-
-    def is_anonymous(self):
-        return False
-
-    def get_id(self):
-        return self.username
-
-    @staticmethod
-    def validate_login(password_hash, password):
-        return check_password_hash(password_hash, password)
+login_manager = LoginManager(app)
 
 
 @login_manager.user_loader
 def load_user(username):
-    u = mongo.db.user.find_one({"_id": username})
-    if not u:
+    user = mongo.db.user.find_one({"_id": username})
+    if not user:
         return None
-    return User(u['_id'])
+    return User(user['_id'])
 
 
 @app.route("/login", methods=["POST"])
