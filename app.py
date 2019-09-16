@@ -1,7 +1,7 @@
 import os
 import datetime
 from flask_login import LoginManager, current_user, login_required, login_user
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from dotenv import load_dotenv
@@ -52,6 +52,8 @@ def login():
             user_obj = User(username["_id"])
             login_user(user_obj)
             return redirect(request.args.get("next") or url_for("my_recipes"))
+        else:
+            flash("Invalid username and or password")
 
     return render_template("login.html", form=form)
 
@@ -61,15 +63,27 @@ def register():
     user = mongo.db.user
     form = RegisterForm()
     if request.method == "POST" and form.validate_on_submit:
-        password = request.form.get("password")
-        hashPass = generate_password_hash(password)
-        user.insert_one({
-            "_id": request.form.get("username"),
-            "display_name": request.form.get("display_name"),
-            "country": request.form.get("country"),
-            "password": hashPass
-            })
-        return redirect(url_for("create_recipe"))
+        username = mongo.db.user.find_one({"_id": form.username.data})
+        display_name = mongo.db.user.find_one({"display_name":
+                                              form.display_name.data})
+        if username is None and display_name is None:
+            password = request.form.get("password")
+            hashPass = generate_password_hash(password)
+            user.insert_one({
+                "_id": request.form.get("username"),
+                "display_name": request.form.get("display_name"),
+                "country": request.form.get("country"),
+                "password": hashPass
+                })
+            username = mongo.db.user.find_one({"_id": form.username.data})
+            user_obj = User(username["_id"])
+            login_user(user_obj)
+            return redirect(url_for("create_recipe"))
+        elif username:
+            flash("Username name already exists")
+        elif display_name:
+            flash("Display name already exists")
+
     return render_template("register.html", form=form)
 
 
