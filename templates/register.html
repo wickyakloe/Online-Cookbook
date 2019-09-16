@@ -6,6 +6,17 @@
         <p>To start creating your recipe now!</p>
     </div>
 </div>
+<div class="row center-align">
+    <div class="col s12 m6 offset-m3">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <span class="red-text"><strong>{{ message }}</strong></span>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    </div>
+</div>
 <form action="{{url_for('register')}}" method="POST" name="form">
     <div class="row">
         <!-- WTForm CSRF token -->
