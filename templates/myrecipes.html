@@ -20,6 +20,7 @@
     {% endif %}
     <div class="col s12 m8">
         {% for recipe in recipes %}
+        {% if recipe.username == current_user.username %}
         <div class="col s12 m4">
             <div class="card medium">
                 <div class="card-image">
@@ -47,6 +48,7 @@
                 </div>
             </div>
         </div>
+        {% endif %}
         {% endfor %}
     </div>
 </div>
