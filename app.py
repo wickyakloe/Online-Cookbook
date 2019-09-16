@@ -189,6 +189,7 @@ def insert_recipe():
 
     # Insert in database
     recipes.insert_one({
+        "username": request.form.get("username"),
         "date_updated": datetime.datetime.utcnow(),
         "title": request.form.get("recipe_name"),
         "category": request.form.get("category_name"),
@@ -237,6 +238,7 @@ def update_recipe(recipe_id):
     recipe.update(
         {"_id": ObjectId(recipe_id)},
         {
+            "username": request.form.get("username"),
             "date_updated": datetime.datetime.utcnow(),
             "title": request.form.get("recipe_name"),
             "description":  request.form.get("description"),

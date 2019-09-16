@@ -19,6 +19,7 @@
   
     <div class="col s12 m8">
       <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method="POST">
+        <input id="username" name="username" type="hidden" class="validate" value="{{ current_user.username }}">
         <div class="row">        
           <div class="input-field col s12">
             <input id="recipe_name" name="recipe_name" type="text" class="validate" value="{{recipe.title}}">

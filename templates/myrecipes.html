@@ -12,7 +12,7 @@
 
     <ul class="sidenav" id="mobile-demo">
         <li><a href="{{ url_for('my_recipes') }}" class="crudMenuItem">My Recipes</a></li>
-        <li><a href="{{ url_for('create_recipe')}" class="crudMenuItem crudActive">Create Recipe</a></li>
+        <li><a href="{{ url_for('create_recipe') }}" class="crudMenuItem crudActive">Create Recipe</a></li>
         <li><a href="#" class="crudMenuItem">Edit Recipe</a></li>
      </ul>
      {% if current_user.is_authenticated %}
