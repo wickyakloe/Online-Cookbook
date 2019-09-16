@@ -11,13 +11,12 @@
     </div>
 
     <ul class="sidenav" id="mobile-demo">
-        <li><a href="#" class="crudMenuItem">My Recipes</a></li>
-        <li><a href="#" class="crudMenuItem crudActive">Create Recipe</a></li>
+        <li><a href="{{ url_for('my_recipes') }}" class="crudMenuItem">My Recipes</a></li>
+        <li><a href="{{ url_for('create_recipe')}" class="crudMenuItem crudActive">Create Recipe</a></li>
         <li><a href="#" class="crudMenuItem">Edit Recipe</a></li>
-        <li><a href="#" class="crudMenuItem">Delete Recipe</a></li>
      </ul>
      {% if current_user.is_authenticated %}
-     <h4>Welcome {{ current_user.username }} </h4>
+     <h4 class="blue-grey-text text-darken-3">Recipes created by: <span class="yellow-text text-darken-3">{{ current_user.username }}</span></h4>
     {% endif %}
     <div class="col s12 m8">
         {% for recipe in recipes %}
