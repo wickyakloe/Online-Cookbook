@@ -3,7 +3,10 @@ from werkzeug.security import check_password_hash
 
 # User model for Flask-Login
 class User():
-
+    """
+    This is required to make Flask-Login work
+    see: https://flask-login.readthedocs.io/en/latest/#your-user-class
+    """
     def __init__(self, username):
         self.username = username
         self.email = None
