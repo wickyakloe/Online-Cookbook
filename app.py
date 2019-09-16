@@ -149,6 +149,7 @@ def view_recipe(recipe_id):
 
 
 @app.route("/my_recipes")
+@login_required
 def my_recipes():
     """
     The overview page of the created recipes (myrecipes.html)
@@ -172,6 +173,7 @@ def create_recipe():
 
 
 @app.route("/insert_recipe", methods=["POST"])
+@login_required
 def insert_recipe():
     """
     When the submit button on the createrecipe.html page is
@@ -204,6 +206,7 @@ def insert_recipe():
 
 
 @app.route("/edit_recipe/<recipe_id>")
+@login_required
 def edit_recipe(recipe_id):
     """
     When the user clicks the edit button on the
@@ -219,6 +222,7 @@ def edit_recipe(recipe_id):
 
 
 @app.route("/update_recipe/<recipe_id>", methods=["POST"])
+@login_required
 def update_recipe(recipe_id):
     """
     When the submit button on the editrecipe.html page is
@@ -253,6 +257,7 @@ def update_recipe(recipe_id):
 
 
 @app.route("/delete_recipe/<recipe_id>")
+@login_required
 def delete_recipe(recipe_id):
     """
     When the user clicks the delete button on the
