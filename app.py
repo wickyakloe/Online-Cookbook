@@ -135,7 +135,8 @@ def index():
     recipes = mongo.db.recipe.find()
     categories = mongo.db.category.find()
     cuisines = mongo.db.cuisine.find()
-    return render_template("index.html", recipes=recipes, categories=categories,
+    return render_template("index.html", recipes=recipes,
+                           categories=categories,
                            cuisines=cuisines)
 
 
@@ -280,14 +281,23 @@ def filter():
     cuisines = mongo.db.cuisine.find()
     category = request.args.get("category")
     cuisine = request.args.get("cuisine")
-    if "category" in request.url:
+    if category != "Any" and cuisine == "Any":
         filter_category = recipes.find({"category": category})
-        return render_template("index.html", recipes=filter_category, categories=categories, cuisines=cuisines)
-    elif "cuisine" in request.url:
-        filter_cuisine = recipes.find({"cuisine": cuisine})
-        return render_template("index.html", recipes=filter_cuisine, categories=categories, cuisines=cuisines)
+        return render_template("index.html", recipes=filter_category,
+                               categories=categories, cuisines=cuisines)
 
-    return render_template("test.html")
+    if cuisine != "Any" and category == "Any":
+        filter_cuisine = recipes.find({"cuisine": cuisine})
+        return render_template("index.html", recipes=filter_cuisine,
+                               categories=categories, cuisines=cuisines)
+
+    if cuisine != "Any" and category != "Any":
+        filter_cuisine = recipes.find({"category": category,
+                                       "cuisine": cuisine})
+        return render_template("index.html", recipes=filter_cuisine,
+                               categories=categories, cuisines=cuisines)
+
+    return redirect(url_for('index'))
 
 
 if __name__ == '__main__':
