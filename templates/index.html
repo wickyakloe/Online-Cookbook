@@ -35,9 +35,14 @@
             <label>Cuisine</label>
         </div>
         <div class="col s2">
-        <button class="btn waves-effect waves-light" type="submit" name="action">Apply Filter
+        <button class="btn-small waves-effect waves-light" type="submit" name="action">Apply Filter
+            <i class="material-icons right">filter_list</i>
+        </button>
+        </div>
+        <div class="col s2">
+            <a href="{{url_for('index')}}" class="btn-small waves-effect waves-light" type="submit" name="action">Clear Filters
                 <i class="material-icons right">filter_list</i>
-            </button>
+            </a>
         </div>
     </div>
 </form>
@@ -45,9 +50,14 @@
 <div class="row">
     {% for recipe in recipes %}
     <div class="col s12 m4">
+        <div class="card-panel blue-grey darken-3">
+            <span class="white-text">{{recipe.category}}</span>
+            <span class="white-text">{{recipe.cuisine}}</span>
+            <span class="white-text">{{recipe.username}}</span>
+        </div>
         <div class="card medium">
             <div class="card-image">
-                <img class="materialboxed" src="{{recipe.image_url}}" alt="recipe_image">
+                <img class="materialboxed" src="{{recipe.image_url}}" alt="recipe_image"> 
                 <span class="card-title">
                     <strong class="blue-grey darken-3">{{recipe.title}}</strong>
                 </span>
