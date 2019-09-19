@@ -13,6 +13,34 @@
         </div>
     </div>
 </div>
+<form action="{{url_for('filter')}}">
+    <div class="row">
+        <div class="col s1">
+            <h6>Filter by:</h6>
+        </div>
+        <div class="input-field col s3">
+            <select name="category" id="category">
+            {% for cat in categories %}
+            <option value="{{cat.name}}" {{'selected' if cat.name == 'Any'}}>{{cat.name}}</option>
+            {% endfor %}
+            </select>
+            <label>Category</label>
+        </div>
+        <div class="input-field col s3">
+            <select name="cuisine" id="cuisine">
+            {% for cuisine in cuisines %}
+            <option value="{{cuisine.name}}" {{'selected' if cuisine.name == 'Any'}}>{{cuisine.name}}</option>
+            {% endfor %}
+            </select>
+            <label>Cuisine</label>
+        </div>
+        <div class="col s2">
+        <button class="btn waves-effect waves-light" type="submit" name="action">Apply Filter
+                <i class="material-icons right">filter_list</i>
+            </button>
+        </div>
+    </div>
+</form>
 <!-- Materialize fab card -->
 <div class="row">
     {% for recipe in recipes %}

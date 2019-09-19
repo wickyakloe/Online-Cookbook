@@ -132,8 +132,11 @@ def index():
     of all the recipes with the ability to view
     a recipe.
     """
-
-    return render_template("index.html", recipes=mongo.db.recipe.find())
+    recipes = mongo.db.recipe.find()
+    categories = mongo.db.category.find()
+    cuisines = mongo.db.cuisine.find()
+    return render_template("index.html", recipes=recipes, categories=categories,
+                           cuisines=cuisines)
 
 
 @app.route("/view_recipe/<recipe_id>")
@@ -268,6 +271,23 @@ def delete_recipe(recipe_id):
     """
     mongo.db.recipe.remove({"_id": ObjectId(recipe_id)})
     return redirect(url_for("my_recipes"))
+
+
+@app.route("/recipe/filter", methods=["GET", "POST"])
+def filter():
+    recipes = mongo.db.recipe
+    categories = mongo.db.category.find()
+    cuisines = mongo.db.cuisine.find()
+    category = request.args.get("category")
+    cuisine = request.args.get("cuisine")
+    if "category" in request.url:
+        filter_category = recipes.find({"category": category})
+        return render_template("index.html", recipes=filter_category, categories=categories, cuisines=cuisines)
+    elif "cuisine" in request.url:
+        filter_cuisine = recipes.find({"cuisine": cuisine})
+        return render_template("index.html", recipes=filter_cuisine, categories=categories, cuisines=cuisines)
+
+    return render_template("test.html")
 
 
 if __name__ == '__main__':
