@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row">
+{% for item in result %}
+<p>{{item.title}}</p>
+{% endfor %}
+</div>
+<div id="chart" class="row">
+    <div class="col s6">
+        <embed type="image/svg+xml" src="{{ chart|safe }}"/>
+    </div>
+    <div class="col s6">
+        <embed type="image/svg+xml" src="{{ chart2|safe }}"/>
+    </div>
+</div>
+{% endblock %}
