@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from werkzeug.security import generate_password_hash
 from user import User
 from form import LoginForm, RegisterForm
+import pygal
 
 # Load the dotenv file
 load_dotenv()
@@ -298,6 +299,42 @@ def filter():
                                categories=categories, cuisines=cuisines)
 
     return redirect(url_for('index'))
+
+
+@app.route("/dashboard")
+def dashboard():
+    """
+    Show the total recipes per category and cuisine
+    in piecharts
+    """
+    categories = [cat["name"] for cat in mongo.db.category.find()]
+    cuisines = [cuis["name"] for cuis in mongo.db.cuisine.find()]
+    recipes = mongo.db.recipe
+    recipe_cat = []
+    recipe_cuis = []
+    for item in categories:
+        count = recipes.find({"category": item}).count()
+        recipe_cat.append([item, count])
+
+    for item in cuisines:
+        count = recipes.find({"cuisine": item}).count()
+        recipe_cuis.append([item, count])
+
+    pie_chart = pygal.Pie()
+    pie_chart.title = 'Recipes by Category'
+    for item in recipe_cat:
+        pie_chart.add(item[0], item[1])
+
+    chart = pie_chart.render_data_uri()
+
+    pie_chart2 = pygal.Pie()
+    pie_chart2.title = 'Recipes by Cuisine'
+    for item in recipe_cuis:
+        pie_chart2.add(item[0], item[1])
+
+    chart2 = pie_chart2.render_data_uri()
+
+    return render_template("dashboard.html", chart=chart, chart2=chart2)
 
 
 if __name__ == '__main__':
