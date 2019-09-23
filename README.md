@@ -18,14 +18,12 @@ Table of Content:
 - [Deployment](#deployment)
   - [Heroku](#heroku)
 - [Credits](#credits)
-- [Content](#content)
 - [Media](#media)
-- [Acknowledgements](#acknowledgements)
 
 ---
 
 - Site owner's goal:
-Promote a brand of cooking tools.
+Allow users to share recipes
 
 - Potential features to include:
   - Create a web application that allows users to store and easily access cooking recipes. Recipes would include fields such as ingredients, preparation steps, required tools, cuisine, etc.
@@ -38,8 +36,6 @@ Promote a brand of cooking tools.
 
 - Advanced potential feature (nice-to-have):
 
-  - Build upon the required tools field to promote your brand of kitchen tools (e.g. oven, pressure cooker, etc…).
-
    - Create a dashboard to provide some statistics about all the recipes.
  
 ## UX
@@ -51,7 +47,7 @@ In particular, as part of this section we recommend that you provide a list of U
 
 This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser. -->
 
-Mockup: View the mockup [here](https://wickyakloe.github.io/Online-Cookbook/mockup/)
+See the initial mockup [here](https://wickyakloe.github.io/Online-Cookbook/mockup/)
 
 Color choices:
 
@@ -75,6 +71,7 @@ We will be using the free tier of MongoDB Atlas which is a cloud MongoDB service
     - user
     - recipe
     - category
+    - cuisine
 
 ### ER Diagram
 
@@ -112,8 +109,10 @@ In addition, you may also use this section to discuss plans for additional featu
 Modules/Frameworks:
 
 - JQuery
-- Bootstrap/Materialize?
+- Materialize?
 - Flask
+- Flask-Login
+- Flask-WTF
 
 ## Testing
 
@@ -136,8 +135,6 @@ You should also mention in this section any interesting bugs or problems you dis
 If this section grows too long, you may want to split it off into a separate file and link to it from here. -->
 
 unitest python
-jasmin ?
-python module?
 
 ## Deployment
 
@@ -198,12 +195,5 @@ How to deploy to heroku here
 
 ## Credits
 
-### Content
-- The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
-
 ### Media
 - The icon used as logo in the navbar is from [iconstore](https://iconstore.co/icons/tasty-icons-free/)
-
-### Acknowledgements
-
-- I received inspiration for this project from X
