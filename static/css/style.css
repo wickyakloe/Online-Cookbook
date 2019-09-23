@@ -16,14 +16,9 @@
     margin-top: 50px
 }
 
-/* Modal styling */
-.vl {
-    border-left: 6px solid green;
-    height: 500px;
-    position: absolute;
-    left: 50%;
-    margin-left: -3px;
-    top: 0;
+/* Filter button */
+.filterButton {
+    margin-top: 25px;
   }
 
 /* Side menu CRUD operation pages */
