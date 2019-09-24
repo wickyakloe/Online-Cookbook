@@ -9,6 +9,9 @@ $(document).ready(function(){
       },
     });
 
+    // Initialize modal
+    $('.modal').modal();
+
     // Initialize material box
     $('.materialboxed').materialbox();
 
