@@ -1,6 +1,8 @@
 # Project Online Cookbook
 
-Create an online cookbook to Find and share recipes.
+Online cookbook to Find and share recipes.
+
+![ResponsiveView](https://raw.githubusercontent.com/wickyakloe/Online-Cookbook/master/assets/responsiveView.png "Mobile and Desktop View")
 
 Table of Content:
 
