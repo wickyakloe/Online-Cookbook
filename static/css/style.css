@@ -21,6 +21,10 @@
     margin-top: 25px;
   }
 
+.headers {
+    margin-bottom: 0px;
+}
+
 /* Side menu CRUD operation pages */
 .crudMenuItem {
     color: #C0C0C0;
