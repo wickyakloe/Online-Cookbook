@@ -162,7 +162,10 @@ def my_recipes():
     This page provides the user with an overview
     with the ability to view, edit or delete.
     """
-    return render_template("myrecipes.html", recipes=mongo.db.recipe.find())
+    user = mongo.db.user.find_one(current_user.username)
+
+    return render_template("myrecipes.html", recipes=mongo.db.recipe.find(),
+                           user=user)
 
 
 @app.route("/create_recipe")
@@ -194,9 +197,12 @@ def insert_recipe():
     cooking_tools = [v for k, v in new_recipe.items() if "cooking_tool" in k]
     steps = [v for k, v in new_recipe.items() if "step" in k]
 
+    # Get current logged in user object
+    user = mongo.db.user.find_one(request.form.get("username"))
+
     # Insert in database
     recipes.insert_one({
-        "username": request.form.get("username"),
+        "display_name": user["display_name"],
         "date_updated": datetime.datetime.utcnow(),
         "title": request.form.get("recipe_name"),
         "category": request.form.get("category_name"),
