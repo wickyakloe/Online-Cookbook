@@ -6,16 +6,18 @@
     <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
-
+    
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <title>Recipe Share - Find&Share Recipes </title>
   </head>
 
   <body>
     <nav>
       <div class="nav-wrapper blue-grey darken-3">
       <a href="{{ url_for('index') }}" class="brand-logo left"><img src="{{ url_for('static', filename='media/0402-chef_48.png')}}" class="logoNav"></a>
-      <a href="{{ url_for('index') }}" class="brandName">Cook Share</a>
+      <a href="{{ url_for('index') }}" class="brandName hide-on-small-only">Recipe Share</a>
       <div class="brand-logo center">
           <span class="hide-on-small-only"><strong><i>Find & Share Recipes</i></strong></span>
           <a href="{{ url_for('login') }}" class="waves-effect waves-light btn yellow darken-3"><strong>CREATE A RECIPE</strong></a>    
