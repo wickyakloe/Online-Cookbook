@@ -3,10 +3,37 @@
 <!-- The Recipe View -->
 <div class="row">
     <div class="card-panel">
+        <div class="row valign-wrapper headers">
+            <div class="col">
+                <i class="medium material-icons blue-grey-text text-darken-3">restaurant</i>
+            </div>
+            <div class="col">            
+                <h3 class="yellow-text text-darken-3"><strong>{{recipe.title}}</strong></h3>
+            </div>
+        </div>
         <div class="card-panel blue-grey darken-3">
-            <header class="white-text">
-                <h4>{{recipe.title}}</h4>
-            </header>
+            <div class="row headers center-align">
+                <div class="col s4">
+                    <span class="white-text"><strong>CHEF</strong></span>
+                </div>
+                <div class="col s4">
+                    <span class="white-text"><strong>CATEGORY</strong></span> 
+                </div>
+                <div class="col s4">
+                    <span class="white-text"><strong>CUISINE</strong></span>
+                </div>
+            </div>
+            <div class="row headers center-align">
+                <div class="col s4">
+                    <span class="white-text">{{recipe.display_name}}</span>
+                </div>
+                <div class="col s4">
+                    <span class="white-text">{{recipe.category}}</span> 
+                </div>
+                <div class="col s4">
+                    <span class="white-text">{{recipe.cuisine}}</span>
+                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col s12 m4">
