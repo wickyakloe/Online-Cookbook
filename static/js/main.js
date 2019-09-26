@@ -20,6 +20,9 @@ $(document).ready(function(){
 
     // Initialize select element
     $('select').formSelect();
+
+    // Initialize tooltip
+    $('.tooltipped').tooltip();
     
   });
 

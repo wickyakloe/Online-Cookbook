@@ -23,9 +23,9 @@
           <a href="{{ url_for('login') }}" class="waves-effect waves-light btn yellow darken-3"><strong>CREATE A RECIPE</strong></a>    
       </div>
         <ul id="nav-mobile" class="right">
-          <li><a href="{{ url_for('dashboard') }}" class=""><i class="material-icons">insert_chart</i></a></li>
+          <li><a href="{{ url_for('dashboard') }}" class="tooltipped" data-position="left" data-tooltip="Dashboard"><i class="material-icons">insert_chart</i></a></li>
           {% if current_user.is_authenticated %}
-          <li><a href="{{ url_for('logout') }}" class=""><i class="material-icons">exit_to_app</i></a></li>
+          <li><a href="{{ url_for('logout') }}" class="tooltipped" data-position="bottom" data-tooltip="Logout"><i class="material-icons">exit_to_app</i></a></li>
          {% endif %}        
         </ul>
       </div>
