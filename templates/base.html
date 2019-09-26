@@ -16,10 +16,12 @@
       <div class="nav-wrapper blue-grey darken-3">
       <a href="{{ url_for('index') }}" class="brand-logo left"><img src="{{ url_for('static', filename='media/0402-chef_48.png')}}" class="logoNav"></a>
       <a href="{{ url_for('index') }}" class="brandName">Cook Share</a>
-      <a href="{{ url_for('dashboard') }}" class="brand-logo center">Dashboard</a>
+      <div class="brand-logo center">
+          <span class="hide-on-small-only"><strong><i>Find & Share Recipes</i></strong></span>
+          <a href="{{ url_for('login') }}" class="waves-effect waves-light btn yellow darken-3"><strong>CREATE A RECIPE</strong></a>    
+      </div>
         <ul id="nav-mobile" class="right">
-          <li class="hide-on-small-only"><span><strong><i>Find & Share Recipes</i></strong></span></li>
-          <li><a href="{{ url_for('login') }}" class="waves-effect waves-light btn yellow darken-3"><strong>CREATE A RECIPE</strong></a></li>          
+          <li><a href="{{ url_for('dashboard') }}" class=""><i class="material-icons">insert_chart</i></a></li>         
         </ul>
       </div>
     </nav>
