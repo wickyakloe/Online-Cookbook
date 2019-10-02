@@ -1,28 +1,41 @@
 # Project Online Cookbook
 
-Online cookbook to Find and share recipes.
+Online cookbook to Find and Share recipes.
 
 ![ResponsiveView](https://raw.githubusercontent.com/wickyakloe/Online-Cookbook/master/assets/responsiveView.png "Mobile and Desktop View")
 
 Table of Content:
 
+- [Features](#features)
 - [UX](#ux)
   - [Front-End Mockup](#front-end-mockup)
 - [Database](#database)
   - [MongoDB](#mongodb)
     - [Creating the Database](#creating-the-database)
     - [ER Diagram](#er-diagram)
-- [Features](#features)
-  - [Existing Features](#existing-features)
-  - [Features Left to Implement](#features-left-to-implement)
 - [Technologies Used](#technologies-used)
 - [Testing](#testing)
 - [Deployment](#deployment)
+  - [Local](#local-deployment)
   - [Heroku](#heroku)
 - [Credits](#credits)
 - [Media](#media)
 
 ---
+## Features
+
+<!-- In this section, you should go over the different parts of your project, and describe each in a sentence or so.
+ 
+### Existing Features
+- Feature 1 - allows users X to achieve Y, by having them fill out Z
+- ...
+
+For some/all of your features, you may choose to reference the specific project files that implement them, although this is entirely optional.
+
+In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
+
+### Features Left to Implement
+- Another feature idea -->
 
 - Site owner's goal:
 Allow users to share recipes
@@ -85,21 +98,6 @@ Click [here](https://www.draw.io/?lightbox=1&highlight=0000ff&layers=1&nav=1&tit
 
 *This ER-Diagram is made using [draw.io](https://www.draw.io).*
 
-## Features
-
-<!-- In this section, you should go over the different parts of your project, and describe each in a sentence or so.
- 
-### Existing Features
-- Feature 1 - allows users X to achieve Y, by having them fill out Z
-- ...
-
-For some/all of your features, you may choose to reference the specific project files that implement them, although this is entirely optional.
-
-In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
-
-### Features Left to Implement
-- Another feature idea -->
-
 ## Technologies Used
 
 - HTML
@@ -153,8 +151,10 @@ In addition, if it is not obvious, you should also describe how to run your code
 
 *Instructions for linux*
 
-1. Make sure you have [python3](https://www.python.org/) installed
-2. Install virtualenv with pip
+
+1.Make sure you have [python3](https://www.python.org/) installed
+
+2.Install virtualenv with pip
 
 ```bash
 #On linux you first need to install pip
@@ -164,7 +164,9 @@ sudo apt install python3-pip
 sudo pip3 install virtualenv
 ```
 
-3.Create a python virtualenv and activate it
+3.Clone this repository and put the contents in your virtualenv
+
+4.Create a python virtualenv and activate it
 
 ```bash
 #Replace online-cookbook with your directory name
@@ -177,15 +179,32 @@ source online-cookbook/bin/activate
 deactivate
 ```
 
-4.Install Flask in the virutalenv
+5.Install the packages in the virutalenv
 
 ```bash
-pip3 install Flask
+pip3 install -r requirements.txt
 ```
 
-5.Clone this repository and put the contents in your virtualenv
+6.Create the following .env file in the root of the directory
+and fill in the values.
 
-6.Run the app.py
+```env
+# See https://github.com/theskumar/python-dotenv for instructions
+
+# Connection link to MONGODB
+MONGO_URI = ""
+
+# DB to connect to
+DBNAME= ""
+
+# Flask secret key
+SECRET_KEY = ""
+
+# Set to empty for false i.e. DEBUG = ""
+DEBUG = "True"
+```
+
+7.Run the app.py
 
 ```bash
 python3 app.py
@@ -193,7 +212,17 @@ python3 app.py
 
 ### Heroku
 
-How to deploy to heroku here
+When deploying to heroku use the following config vars
+
+| Variable        | Value  |
+| --------------- | ------ |
+|DEBUG| True or Empty |
+|MONGO_URI| MONGO connection link |
+|DBNAME| MONGO DB name |
+|IP| 0.0.0.0 |
+|PORT| 5000 |
+|SECRECT_KEY| yoursecretkey |
+
 
 ## Credits
 
