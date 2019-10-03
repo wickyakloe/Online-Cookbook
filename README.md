@@ -24,19 +24,6 @@ Table of Content:
 ---
 ## Features
 
-<!-- In this section, you should go over the different parts of your project, and describe each in a sentence or so.
- 
-### Existing Features
-- Feature 1 - allows users X to achieve Y, by having them fill out Z
-- ...
-
-For some/all of your features, you may choose to reference the specific project files that implement them, although this is entirely optional.
-
-In addition, you may also use this section to discuss plans for additional features to be implemented in the future:
-
-### Features Left to Implement
-- Another feature idea -->
-
 - Site owner's goal:
 Allow users to share recipes
 
@@ -54,13 +41,6 @@ Allow users to share recipes
    - Create a dashboard to provide some statistics about all the recipes.
  
 ## UX
- 
-<!-- Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
-
-In particular, as part of this section we recommend that you provide a list of User Stories, with the following general structure:
-- As a user type, I want to perform an action, so that I can achieve a goal.
-
-This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser. -->
 
 See the initial mockup [here](https://wickyakloe.github.io/Online-Cookbook/mockup/)
 
@@ -109,23 +89,25 @@ Click [here](https://www.draw.io/?lightbox=1&highlight=0000ff&layers=1&nav=1&tit
 Modules/Frameworks:
 
 - JQuery
-- Materialize?
+- Materialize
 - Flask
 - Flask-Login
 - Flask-WTF
+- Python unitttest
 
 ## Testing
 
 The Flask app is tested using pythons [unittest](https://docs.python.org/3/library/unittest.html) module in combination with the [coverage](https://coverage.readthedocs.io/en/v4.5.x/) module for seeing the code coverage of the unit tests.
 
 Coverage:
+
 | Name     | Stmts | Miss | Cover |
 |----------|-------|------|-------|
 | app.py   | 142   | 44   | 69%   |
 | form.py  | 9     | 0    | 100%  |
 | tests.py | 75    | 0    | 100%  |
 | user.py  | 15    | 3    | 80%   |
-|TOTAL     | 241   | 47   | 80%   |
+| TOTAL     | 241   | 47   | 80%   |
 
 Click here for > [full coverage report](https://wickyakloe.github.io/Online-Cookbook/assets/htmlcov/).
 
@@ -237,3 +219,4 @@ When deploying to heroku use the following config vars
 
 ### Media
 - The icon used as logo in the navbar is from [iconstore](https://iconstore.co/icons/tasty-icons-free/)
+- Current displayed 'test' recipes are from [jamie oliver](https://www.jamieoliver.com/) website and from [allrecipes](https://www.allrecipes.com/)
