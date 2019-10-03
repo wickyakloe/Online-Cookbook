@@ -116,36 +116,41 @@ Modules/Frameworks:
 
 ## Testing
 
-<!-- In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
+The Flask app is tested using pythons [unittest](https://docs.python.org/3/library/unittest.html) module in combination with the [coverage](https://coverage.readthedocs.io/en/v4.5.x/) module for seeing the code coverage of the unit tests.
 
-Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
+Coverage:
+| Name     | Stmts | Miss | Cover |
+|----------|-------|------|-------|
+| app.py   | 142   | 44   | 69%   |
+| form.py  | 9     | 0    | 100%  |
+| tests.py | 75    | 0    | 100%  |
+| user.py  | 15    | 3    | 80%   |
+|TOTAL     | 241   | 47   | 80%   |
 
-For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
+Click here for > [full coverage report](https://wickyakloe.github.io/Online-Cookbook/assets/htmlcov/).
 
-1. Contact form:
-    1. Go to the "Contact Us" page
-    2. Try to submit the empty form and verify that an error message about the required fields appears
-    3. Try to submit the form with an invalid email address and verify that a relevant error message appears
-    4. Try to submit the form with all inputs valid and verify that a success message appears.
+You can run the tests manually with the following command:
 
-In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
+```code
+python3 -m unittest
+```
 
-You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
+Using the coverage module(
+add the -m flag to see which lines are not being tested )
 
-If this section grows too long, you may want to split it off into a separate file and link to it from here. -->
+```code
+# To run the tests.
+coverage run tests.py
 
-unitest python
+# To get a report in plain view
+coverage report -m *.py
+
+# To generate a pretty HTML report
+coverage html *.py
+```
+
 
 ## Deployment
-
-<!-- This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
-
-In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
-- Different values for environment variables (Heroku Config Vars)?
-- Different configuration files?
-- Separate git branch?
-
-In addition, if it is not obvious, you should also describe how to run your code locally. -->
 
 ### Local deployment
 
@@ -225,6 +230,10 @@ When deploying to heroku use the following config vars
 
 
 ## Credits
+
+- For unittesting examples and usage > https://www.patricksoftwareblog.com/unit-testing-a-flask-application/
+
+- Flask-Login example > https://github.com/boh717/FlaskLogin-and-pymongo
 
 ### Media
 - The icon used as logo in the navbar is from [iconstore](https://iconstore.co/icons/tasty-icons-free/)
