@@ -295,17 +295,17 @@ def filter():
     cuisines = mongo.db.cuisine.find()
     category = request.args.get("category")
     cuisine = request.args.get("cuisine")
-    if category != "Any" and cuisine == "Any":
+    if category != "All" and cuisine == "All":
         filter_category = recipes.find({"category": category})
         return render_template("index.html", recipes=filter_category,
                                categories=categories, cuisines=cuisines)
 
-    if cuisine != "Any" and category == "Any":
+    if cuisine != "All" and category == "All":
         filter_cuisine = recipes.find({"cuisine": cuisine})
         return render_template("index.html", recipes=filter_cuisine,
                                categories=categories, cuisines=cuisines)
 
-    if cuisine != "Any" and category != "Any":
+    if cuisine != "All" and category != "All":
         filter_cuisine = recipes.find({"category": category,
                                        "cuisine": cuisine})
         return render_template("index.html", recipes=filter_cuisine,

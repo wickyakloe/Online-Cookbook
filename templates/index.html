@@ -7,16 +7,18 @@
         </div>
         <div class="input-field col s3">
             <select name="category" id="category">
+            <option value="All" selected>All</option>
             {% for cat in categories %}
-            <option value="{{cat.name}}" {{'selected' if cat.name == 'Any'}}>{{cat.name}}</option>
+            <option value="{{cat.name}}">{{cat.name}}</option>
             {% endfor %}
             </select>
             <label>Category</label>
         </div>
         <div class="input-field col s3">
             <select name="cuisine" id="cuisine">
+            <option value="All" selected>All</option>
             {% for cuisine in cuisines %}
-            <option value="{{cuisine.name}}" {{'selected' if cuisine.name == 'Any'}}>{{cuisine.name}}</option>
+            <option value="{{cuisine.name}}">{{cuisine.name}}</option>
             {% endfor %}
             </select>
             <label>Cuisine</label>
