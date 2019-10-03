@@ -22,32 +22,32 @@ class tests_Flask_application(unittest.TestCase):
         pass
 
     def test_main_page(self):
-        response = self.app.get('/', follow_redirects=True)
+        response = self.app.get('/recipe', follow_redirects=True)
         self.assertEqual(response.status_code, 200)
 
     def test_myrecipes_page(self):
-        response = self.app.get('/my_recipes', follow_redirects=True)
+        response = self.app.get('/recipe/my_recipes', follow_redirects=True)
         self.assertEqual(response.status_code, 401)
         self.assertEqual(response.status_code, 200)
 
     def test_show_page(self):
         recipe_id = ObjectId("5d8359843a5f1a53eb5885b5")
-        response = self.app.get('/view_recipe/{}'.format(recipe_id), follow_redirects=True)
+        response = self.app.get('/recipe/{}'.format(recipe_id), follow_redirects=True)
         self.assertEqual(response.status_code, 200)
 
     def test_create_page(self):
-        response = self.app.get('/create_recipe', follow_redirects=True)
+        response = self.app.get('/recipe/create', follow_redirects=True)
         self.assertEqual(response.status_code, 401)
         self.assertEqual(response.status_code, 200)
 
     def test_edit_page(self):
         recipe_id = ObjectId("5d8359843a5f1a53eb5885b5")
-        response = self.app.get('/edit_recipe/{}'.format(recipe_id), follow_redirects=True)
+        response = self.app.get('/recipe/edit/{}'.format(recipe_id), follow_redirects=True)
         self.assertEqual(response.status_code, 401)
         self.assertEqual(response.status_code, 200)
 
     def test_dashboard_page(self):
-        response = self.app.get('/dashboard', follow_redirects=True)
+        response = self.app.get('/recipe/dashboard', follow_redirects=True)
         self.assertEqual(response.status_code, 200)
 
 

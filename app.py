@@ -1,7 +1,9 @@
 import os
 import datetime
-from flask_login import LoginManager, current_user, login_required, login_user, logout_user
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_login import LoginManager, current_user, \
+    login_required, login_user, logout_user
+from flask import Flask, render_template, request, \
+    redirect, url_for, flash
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from dotenv import load_dotenv
@@ -132,7 +134,7 @@ def register():
     return render_template("register.html", form=form)
 
 
-@app.route("/")
+@app.route("/recipe")
 def index():
     """
     The landing page of the site (index.html).
@@ -148,7 +150,7 @@ def index():
                            cuisines=cuisines)
 
 
-@app.route("/view_recipe/<recipe_id>")
+@app.route("/recipe/<recipe_id>")
 def view_recipe(recipe_id):
     """
     The recipe page of the site (recipe.html).
@@ -160,7 +162,7 @@ def view_recipe(recipe_id):
     return render_template("recipe.html", recipe=the_recipe)
 
 
-@app.route("/my_recipes")
+@app.route("/recipe/my_recipes")
 @login_required
 def my_recipes():
     """
@@ -175,7 +177,7 @@ def my_recipes():
                            user=user)
 
 
-@app.route("/create_recipe")
+@app.route("/recipe/create")
 @login_required
 def create_recipe():
     """
@@ -187,7 +189,7 @@ def create_recipe():
                            cuisines=mongo.db.cuisine.find())
 
 
-@app.route("/insert_recipe", methods=["POST"])
+@app.route("/recipe/insert", methods=["POST"])
 @login_required
 def insert_recipe():
     """
@@ -223,7 +225,7 @@ def insert_recipe():
     return redirect(url_for("index"))
 
 
-@app.route("/edit_recipe/<recipe_id>")
+@app.route("/recipe/edit/<recipe_id>")
 @login_required
 def edit_recipe(recipe_id):
     """
@@ -239,7 +241,7 @@ def edit_recipe(recipe_id):
                            cuisines=mongo.db.cuisine.find())
 
 
-@app.route("/update_recipe/<recipe_id>", methods=["POST"])
+@app.route("/recipe/update/<recipe_id>", methods=["POST"])
 @login_required
 def update_recipe(recipe_id):
     """
@@ -274,7 +276,7 @@ def update_recipe(recipe_id):
     return redirect(url_for("index"))
 
 
-@app.route("/delete_recipe/<recipe_id>")
+@app.route("/recipe/delete/<recipe_id>")
 @login_required
 def delete_recipe(recipe_id):
     """
@@ -314,7 +316,7 @@ def filter():
     return redirect(url_for('index'))
 
 
-@app.route("/dashboard")
+@app.route("/recipe/dashboard")
 def dashboard():
     """
     Show the total recipes per category and cuisine
