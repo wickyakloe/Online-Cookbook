@@ -134,6 +134,7 @@ def register():
     return render_template("register.html", form=form)
 
 
+@app.route("/")
 @app.route("/recipe")
 def index():
     """
