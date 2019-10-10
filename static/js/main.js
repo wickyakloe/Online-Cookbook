@@ -1,14 +1,5 @@
 // Materialize Initializations
 $(document).ready(function(){
-    // Needed for materialize autocomplete
-    $('input.autocomplete').autocomplete({
-      data: {
-        "Apple": null,
-        "Microsoft": null,
-        "Google": 'https://placehold.it/250x250'
-      },
-    });
-
     // Initialize modal
     $('.modal').modal();
 
@@ -32,13 +23,13 @@ function addIngredient(){
     if(i == 1){
       i++
       $(`<div class="input-field col s3 ingredient${i}">
-            <input id="ingredient${i}" name="ingredient${i}" type="text" class="validate ingredient">
+            <input id="ingredient${i}" name="ingredient${i}" type="text" class="validate ingredient" required>
           </div>`).insertAfter(`.ingredient${i-1}`)
       $('<a class="btn-floating waves-effect waves-light red" onclick="removeLastIngredient()"><i class="material-icons">delete</i></a>').insertAfter("a[onclick='addIngredient()']")
     } else{
       i++
       $(`<div class="input-field col s3 ingredient${i}">
-            <input id="ingredient${i}" name="ingredient${i}" type="text" class="validate ingredient">
+            <input id="ingredient${i}" name="ingredient${i}" type="text" class="validate ingredient" required>
           </div>`).insertAfter(`.ingredient${i-1}`)
     }
 }
@@ -58,13 +49,13 @@ function addTool(){
     if(i == 1){
       i++
       $(`<div class="input-field col s3 cooking_tool${i}">
-            <input id="cooking_tool${i}" name="cooking_tool${i}" type="text" class="validate cooking_tool">
+            <input id="cooking_tool${i}" name="cooking_tool${i}" type="text" class="validate cooking_tool" required>
           </div>`).insertAfter(`.cooking_tool${i-1}`)
       $('<a class="btn-floating waves-effect waves-light red" onclick="removeLastTool()"><i class="material-icons">delete</i></a>').insertAfter("a[onclick='addTool()']")
     } else{
       i++
       $(`<div class="input-field col s3 cooking_tool${i}">
-            <input id="cooking_tool${i}" name="cooking_tool${i}" type="text" class="validate cooking_tool">
+            <input id="cooking_tool${i}" name="cooking_tool${i}" type="text" class="validate cooking_tool" required>
           </div>`).insertAfter(`.cooking_tool${i-1}`)
       }
 }
@@ -83,11 +74,11 @@ function addStep(){
     let i = parseInt($(".prefix:last").html())
     if(i == 1){
       i++
-      $(`<div class="input-field col s12 step${i}"><span class="prefix">${i}</span><input id="step${i}" name="step${i}" type="text" class="validate"></div>`).insertAfter(`.step${i-1}`)
+      $(`<div class="input-field col s12 step${i}"><span class="prefix">${i}</span><input id="step${i}" name="step${i}" type="text" class="validate" required></div>`).insertAfter(`.step${i-1}`)
       $('<a class="btn-floating btn-large waves-effect waves-light red" onclick="removeLastStep()"><i class="material-icons">delete</i></a>').insertAfter("a[onclick='addStep()']")
     } else{
       i++
-      $(`<div class="input-field col s12 step${i}"><span class="prefix">${i}</span><input id="step${i}" name="step${i}" type="text" class="validate"></div>`).insertAfter(`.step${i-1}`)
+      $(`<div class="input-field col s12 step${i}"><span class="prefix">${i}</span><input id="step${i}" name="step${i}" type="text" class="validate" required></div>`).insertAfter(`.step${i-1}`)
     }
 }
 

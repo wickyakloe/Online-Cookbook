@@ -175,56 +175,47 @@ def my_recipes():
     return render_template("myrecipes.html", recipes=mongo.db.recipe.find())
 
 
-@app.route("/recipe/create")
+@app.route("/recipe/create", methods=["GET", "POST"])
 @login_required
 def create_recipe():
     """
     The page where the logged in user can create a recipe (createrecipe.html).
     The user is presented with a form to create the recipe.
     """
+    if request.method == "POST":
+        recipes = mongo.db.recipe
+        new_recipe = request.form.to_dict()
+
+        # Get all ingredients,cooking tools and steps and put in list
+        ingredients = [v for k, v in new_recipe.items() if "ingredient" in k]
+        cooking_tools = [v for k, v in new_recipe.items()
+                         if "cooking_tool" in k]
+        steps = [v for k, v in new_recipe.items() if "step" in k]
+
+        # Get current logged in user object
+        user = mongo.db.user.find_one(request.form.get("username"))
+
+        # Insert in database
+        recipes.insert_one({
+            "username": user["_id"],
+            "display_name": user["display_name"],
+            "date_updated": datetime.datetime.utcnow(),
+            "title": request.form.get("recipe_name"),
+            "category": request.form.get("category_name"),
+            "cuisine": request.form.get("cuisine_name"),
+            "image_url": request.form.get("image_url"),
+            "description":  request.form.get("description"),
+            "ingredients": ingredients,
+            "cooking_tools": cooking_tools,
+            "steps": steps
+        })
+        return redirect(url_for("index"))
     return render_template("createrecipe.html",
                            categories=mongo.db.category.find(),
                            cuisines=mongo.db.cuisine.find())
 
 
-@app.route("/recipe/insert", methods=["POST"])
-@login_required
-def insert_recipe():
-    """
-    When the submit button on the createrecipe.html page is
-    clicked this function is called to insert the recipe in
-    the database after it has been inserted the user is redirected
-    to the landing page index.html.
-    """
-    recipes = mongo.db.recipe
-    new_recipe = request.form.to_dict()
-
-    # Get all ingredients,cooking tools and steps and put in list
-    ingredients = [v for k, v in new_recipe.items() if "ingredient" in k]
-    cooking_tools = [v for k, v in new_recipe.items() if "cooking_tool" in k]
-    steps = [v for k, v in new_recipe.items() if "step" in k]
-
-    # Get current logged in user object
-    user = mongo.db.user.find_one(request.form.get("username"))
-
-    # Insert in database
-    recipes.insert_one({
-        "username": user["_id"],
-        "display_name": user["display_name"],
-        "date_updated": datetime.datetime.utcnow(),
-        "title": request.form.get("recipe_name"),
-        "category": request.form.get("category_name"),
-        "cuisine": request.form.get("cuisine_name"),
-        "image_url": request.form.get("image_url"),
-        "description":  request.form.get("description"),
-        "ingredients": ingredients,
-        "cooking_tools": cooking_tools,
-        "steps": steps
-    })
-    return redirect(url_for("index"))
-
-
-@app.route("/recipe/edit/<recipe_id>")
+@app.route("/recipe/edit/<recipe_id>", methods=["GET", "POST"])
 @login_required
 def edit_recipe(recipe_id):
     """
@@ -234,48 +225,40 @@ def edit_recipe(recipe_id):
     populated with the data as present in the database
     with the ability to edit every field.
     """
+    if request.method == "POST":
+        recipe = mongo.db.recipe
+        updated_recipe = request.form.to_dict()
+
+        # Get all ingredients,cooking tools and steps and put in list
+        ingredients = [v for k, v in updated_recipe.items()
+                       if "ingredient" in k]
+        cooking_tools = [v for k, v in updated_recipe.items()
+                         if "cooking_tool" in k]
+        steps = [v for k, v in updated_recipe.items() if "step" in k]
+
+        user = mongo.db.user.find_one(request.form.get("username"))
+
+        recipe.update(
+            {"_id": ObjectId(recipe_id)},
+            {
+                "username": request.form.get("username"),
+                "display_name": user["display_name"],
+                "date_updated": datetime.datetime.utcnow(),
+                "title": request.form.get("recipe_name"),
+                "description":  request.form.get("description"),
+                "category": request.form.get("category_name"),
+                "cuisine": request.form.get("cuisine_name"),
+                "image_url": request.form.get("image_url"),
+                "ingredients": ingredients,
+                "cooking_tools": cooking_tools,
+                "steps": steps
+            })
+        return redirect(url_for("index"))
+
     the_recipe = mongo.db.recipe.find_one({"_id": ObjectId(recipe_id)})
     return render_template("editrecipe.html", recipe=the_recipe,
                            categories=mongo.db.category.find(),
                            cuisines=mongo.db.cuisine.find())
-
-
-@app.route("/recipe/update/<recipe_id>", methods=["POST"])
-@login_required
-def update_recipe(recipe_id):
-    """
-    When the submit button on the editrecipe.html page is
-    clicked this function is called to update the recipe in
-    the database after it has been updated the user is redirected
-    to the landing page index.html.
-    """
-    recipe = mongo.db.recipe
-    updated_recipe = request.form.to_dict()
-
-    # Get all ingredients,cooking tools and steps and put in list
-    ingredients = [v for k, v in updated_recipe.items() if "ingredient" in k]
-    cooking_tools = [v for k, v in updated_recipe.items()
-                     if "cooking_tool" in k]
-    steps = [v for k, v in updated_recipe.items() if "step" in k]
-
-    user = mongo.db.user.find_one(request.form.get("username"))
-
-    recipe.update(
-        {"_id": ObjectId(recipe_id)},
-        {
-            "username": request.form.get("username"),
-            "display_name": user["display_name"],
-            "date_updated": datetime.datetime.utcnow(),
-            "title": request.form.get("recipe_name"),
-            "description":  request.form.get("description"),
-            "category": request.form.get("category_name"),
-            "cuisine": request.form.get("cuisine_name"),
-            "image_url": request.form.get("image_url"),
-            "ingredients": ingredients,
-            "cooking_tools": cooking_tools,
-            "steps": steps
-        })
-    return redirect(url_for("index"))
 
 
 @app.route("/recipe/delete/<recipe_id>")

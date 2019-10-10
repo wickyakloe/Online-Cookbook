@@ -6,38 +6,36 @@
       <ul class="crudMenu hide-on-small-only">
           <li><a href="{{ url_for('my_recipes') }}" class="crudMenuItem">My Recipes</a><span class="right-align chevronMenuItem chevronAlign">></span></li>
           <li><a href="{{ url_for('create_recipe')}}" class="crudMenuItem crudActive">Create Recipe</a><span class="right-align chevronMenuItem chevronActive">></span></li>
-          <li><a href="#" class="crudMenuItem">Edit Recipe</a><span class="right-align chevronMenuItem chevronAlign">></span></li>
       </ul>
     </div>
 
     <ul class="sidenav" id="mobile-demo">
         <li><a href="{{ url_for('my_recipes') }}"" class="crudMenuItem">My Recipes</a></li>
         <li><a href="{{ url_for('create_recipe')}}" class="crudMenuItem crudActive">Create Recipe</a></li>
-        <li><a href="#" class="crudMenuItem">Edit Recipe</a></li>
      </ul>
   
     <div class="col s12 m8">
-      <form action="{{ url_for('insert_recipe') }}" method="POST">
-        <input id="username" name="username" type="hidden" class="validate" value="{{ current_user.username }}">
+      <form method="POST">
+        <input id="username" name="username" type="hidden" class="validate" value="{{ current_user.username }}" required>
         <div class="row">        
           <div class="input-field col s12">
-            <input id="recipe_name" name="recipe_name" type="text" class="validate">
+            <input id="recipe_name" name="recipe_name" type="text" class="validate" required>
             <label for="recipe_name">RECIPE NAME</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
-            <select id="category" name="category_name">
+            <select id="category" name="category_name" required>
               <option value="" disabled selected>Choose</option>
               {% for cat in categories %}
-              <option value="{{cat.name}}">{{cat.name}}</option>
+              <option value="{{cat.name}}" required>{{cat.name}}</option>
               {% endfor %}
             </select>
             <label>CATEGORY</label>
           </div>
           <div class="input-field col s6">
-            <select id="cuisine" name="cuisine_name">
-              <option value="" disabled selected>Any</option>
+            <select id="cuisine" name="cuisine_name" required>
+              <option value="" disabled selected>Choose</option>
               {% for cuisine in cuisines %}
               <option value="{{cuisine.name}}">{{cuisine.name}}</option>
               {% endfor %}
@@ -47,19 +45,19 @@
         </div>
         <div class="row">        
           <div class="input-field col s12">
-            <input id="image_url" name="image_url" type="text" class="validate">
+            <input id="image_url" name="image_url" type="text" class="validate" required>
             <label for="image_url">Image URL</label>
           </div>
         </div>
         <div class="row">        
           <div class="input-field col s12">
-            <input id="description" name="description" type="text" class="validate">
+            <input id="description" name="description" type="text" class="validate" required>
             <label for="desciption">DESCRIPTION</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s3 ingredient1">
-            <input id="ingredient1" name="ingredient1" type="text" class="validate ingredient">
+            <input id="ingredient1" name="ingredient1" type="text" class="validate ingredient" required>
             <label for="ingredient1">INGREDIENTS</label>
           </div>
           <div class="input-field col s2">
@@ -68,7 +66,7 @@
         </div>
         <div class="row">
           <div class="input-field col s3 cooking_tool1">
-            <input id="cooking_tool1" name="cooking_tool1" type="text" class="validate cooking_tool">
+            <input id="cooking_tool1" name="cooking_tool1" type="text" class="validate cooking_tool" required>
             <label for="cooking_tool1">COOKING TOOLS</label>
           </div>
           <div class="input-field col s2">
@@ -79,7 +77,7 @@
           <div class="input-field col s12 step1">
             <span class="prefix">1</span>
             <label for="step1">STEPS</label>
-            <input id="step1" name="step1" type="text" class="validate">
+            <input id="step1" name="step1" type="text" class="validate" required>
           </div>
           <div class="input-field col s12 center-align">
             <a class="btn-floating btn-large waves-effect waves-light" onclick="addStep()"><i class="material-icons">add</i></a>

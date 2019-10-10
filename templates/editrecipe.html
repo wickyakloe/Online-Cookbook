@@ -17,17 +17,17 @@
      </ul>
   
     <div class="col s12 m8">
-      <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method="POST">
+      <form action="{{ url_for('edit_recipe', recipe_id=recipe._id) }}" method="POST">
         <input id="username" name="username" type="hidden" class="validate" value="{{ current_user.username }}">
         <div class="row">        
           <div class="input-field col s12">
-            <input id="recipe_name" name="recipe_name" type="text" class="validate" value="{{recipe.title}}">
+            <input id="recipe_name" name="recipe_name" type="text" class="validate" value="{{recipe.title}}" required>
             <label for="recipe_name">RECIPE NAME</label>
           </div>
         </div>
         <div class="row">
           <div class="input-field col s6">
-            <select id="category" name="category_name">
+            <select id="category" name="category_name" required>
               <option value="" disabled selected>Choose</option>
               {% for cat in categories %}
                 {% if cat.name == recipe.category %}
@@ -40,7 +40,7 @@
             <label>CATEGORY</label>
           </div>
           <div class="input-field col s6">
-            <select id="cuisine" name="cuisine_name">
+            <select id="cuisine" name="cuisine_name" required>
               <option value="" disabled selected>Any</option>
               {% for cuisine in cuisines %}
                 {% if cuisine.name == recipe.cuisine %}
@@ -55,13 +55,13 @@
         </div>
         <div class="row">        
           <div class="input-field col s12">
-            <input id="image_url" name="image_url" type="text" class="validate" value="{{recipe.image_url}}">
+            <input id="image_url" name="image_url" type="text" class="validate" value="{{recipe.image_url}}" required>
             <label for="image_url">Image URL</label>
           </div>
         </div>
         <div class="row">        
           <div class="input-field col s12">
-            <input id="description" name="description" type="text" class="validate" value="{{recipe.description}}">
+            <input id="description" name="description" type="text" class="validate" value="{{recipe.description}}" required>
             <label for="desciption">DESCRIPTION</label>
           </div>
         </div>
@@ -69,7 +69,7 @@
         <div class="row">
           {% for ingredient in recipe.ingredients %}
           <div class="input-field col s3 ingredient{{loop.index}}">
-            <input id="ingredient{{loop.index}}" name="ingredient{{loop.index}}" type="text" class="validate ingredient" value="{{ingredient}}">
+            <input id="ingredient{{loop.index}}" name="ingredient{{loop.index}}" type="text" class="validate ingredient" value="{{ingredient}}" required>
           </div>
           {% endfor %}
           <div class="input-field col s2">
@@ -81,7 +81,7 @@
         <div class="row">
           {% for tool in recipe.cooking_tools %}
           <div class="input-field col s3 cooking_tool{{loop.index}}">
-            <input id="cooking_tool{{loop.index}}" name="{cooking_tool{{loop.index}}" type="text" class="validate cooking_tool" value="{{tool}}">    
+            <input id="cooking_tool{{loop.index}}" name="{cooking_tool{{loop.index}}" type="text" class="validate cooking_tool" value="{{tool}}" required>    
           </div>
           {% endfor %}
           <div class="input-field col s2">
@@ -94,7 +94,7 @@
           {% for step in recipe.steps %}
           <div class="input-field col s12 step{{loop.index}}">
             <span class="prefix">{{loop.index}}</span>
-            <input id="step{{loop.index}}" name="step{{loop.index}}" type="text" class="validate" value="{{step}}">
+            <input id="step{{loop.index}}" name="step{{loop.index}}" type="text" class="validate" value="{{step}}" required>
           </div>
           {% endfor %}
           <div class="input-field col s12 center-align">
