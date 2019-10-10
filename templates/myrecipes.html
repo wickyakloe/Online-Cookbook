@@ -16,11 +16,11 @@
         <li><a href="#" class="crudMenuItem">Edit Recipe</a></li>
      </ul>
      {% if current_user.is_authenticated %}
-     <h4 class="blue-grey-text text-darken-3">Recipes created by: <span class="yellow-text text-darken-3">{{ current_user.username }}</span></h4>
+     <h4 class="blue-grey-text text-darken-3">Recipes created by: <span class="yellow-text text-darken-3">{{ current_user.display_name }}</span></h4>
     {% endif %}
     <div class="col s12 m8">
         {% for recipe in recipes %}
-        {% if recipe.display_name == user.display_name %}
+        {% if current_user.username == recipe.username %}
         <div class="col s12 m4">
             <div class="card medium">
                 <div class="card-image">

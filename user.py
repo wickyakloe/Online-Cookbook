@@ -7,9 +7,9 @@ class User():
     This is required to make Flask-Login work
     see: https://flask-login.readthedocs.io/en/latest/#your-user-class
     """
-    def __init__(self, username):
+    def __init__(self, username, display_name):
         self.username = username
-        self.email = None
+        self.display_name = display_name
 
     def is_authenticated(self):
         return True

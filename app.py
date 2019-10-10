@@ -56,7 +56,7 @@ def load_user(username):
     user = mongo.db.user.find_one({"_id": username})
     if not user:
         return None
-    return User(user['_id'])
+    return User(user['_id'], user['display_name'])
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -64,7 +64,7 @@ def login():
     """
     Opens the login.html page.
     If there is a session cookie the user is logged in directly
-    and redirected to the myrecipes.html page.
+    and redirected to the createrecipe.html page.
     If there is no cookie, the entered username and password
     is beinged checked against the database on submit and if correct
     the user is redirected to the myrecipes.html page and if
@@ -72,14 +72,14 @@ def login():
     """
 
     if current_user.is_authenticated:
-        return redirect(url_for("my_recipes"))
+        return redirect(url_for("create_recipe"))
 
     form = LoginForm()
     if request.method == "POST" and form.validate_on_submit():
         username = mongo.db.user.find_one({"_id": form.username.data})
         if username and User.validate_login(username["password"],
                                             form.password.data):
-            user_obj = User(username["_id"])
+            user_obj = User(username["_id"], username["display_name"])
             login_user(user_obj)
             return redirect(request.args.get("next") or url_for("my_recipes"))
         else:
@@ -111,9 +111,8 @@ def register():
     form = RegisterForm()
     if request.method == "POST" and form.validate_on_submit:
         username = mongo.db.user.find_one({"_id": form.username.data})
-        display_name = mongo.db.user.find_one({"display_name":
-                                              form.display_name.data})
-        if username is None and display_name is None:
+
+        if username is None:
             password = request.form.get("password")
             hashPass = generate_password_hash(password)
             user.insert_one({
@@ -123,13 +122,11 @@ def register():
                 "password": hashPass
                 })
             username = mongo.db.user.find_one({"_id": form.username.data})
-            user_obj = User(username["_id"])
+            user_obj = User(username["_id"], username["display_name"])
             login_user(user_obj)
             return redirect(url_for("create_recipe"))
         elif username:
             flash("Username name already exists")
-        elif display_name:
-            flash("Display name already exists")
 
     return render_template("register.html", form=form,
                            countries=mongo.db.countries.find())
@@ -147,6 +144,7 @@ def index():
     recipes = mongo.db.recipe.find()
     categories = mongo.db.category.find()
     cuisines = mongo.db.cuisine.find()
+
     return render_template("index.html", recipes=recipes,
                            categories=categories,
                            cuisines=cuisines)
@@ -173,10 +171,8 @@ def my_recipes():
     This page provides the user with an overview
     with the ability to view, edit or delete.
     """
-    user = mongo.db.user.find_one(current_user.username)
 
-    return render_template("myrecipes.html", recipes=mongo.db.recipe.find(),
-                           user=user)
+    return render_template("myrecipes.html", recipes=mongo.db.recipe.find())
 
 
 @app.route("/recipe/create")
@@ -213,6 +209,7 @@ def insert_recipe():
 
     # Insert in database
     recipes.insert_one({
+        "username": user["_id"],
         "display_name": user["display_name"],
         "date_updated": datetime.datetime.utcnow(),
         "title": request.form.get("recipe_name"),
@@ -261,10 +258,13 @@ def update_recipe(recipe_id):
                      if "cooking_tool" in k]
     steps = [v for k, v in updated_recipe.items() if "step" in k]
 
+    user = mongo.db.user.find_one(request.form.get("username"))
+
     recipe.update(
         {"_id": ObjectId(recipe_id)},
         {
             "username": request.form.get("username"),
+            "display_name": user["display_name"],
             "date_updated": datetime.datetime.utcnow(),
             "title": request.form.get("recipe_name"),
             "description":  request.form.get("description"),
