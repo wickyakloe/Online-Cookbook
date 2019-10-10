@@ -16,8 +16,8 @@ Table of Content:
 - [Technologies Used](#technologies-used)
 - [Testing](#testing)
 - [Deployment](#deployment)
-  - [Local](#local-deployment)
   - [Heroku](#heroku)
+  - [Local](#local-deployment)
 - [Credits](#credits)
 - [Media](#media)
 
@@ -62,11 +62,16 @@ We will be using the free tier of MongoDB Atlas which is a cloud MongoDB service
 
 2. Create a free tier cluster, database and a mongodb user for your cluster. You can follow the instructions [here](https://docs.atlas.mongodb.com/getting-started/#deploy-a-free-tier-cluster) how to do this.
 
-3. In your database create the following collections according to the entity diagram below
+3. In your database the following collections will be created by the application:
     - user
     - recipe
-    - category
-    - cuisine
+
+And the following collections need to be manually created:
+ - category ( as per ER diagram below )
+ - cuisine ( as per ER diagram below )
+ - countries ( import [this](https://github.com/ozlerhakan/mongodb-json-files/blob/master/datasets/countries-small.json
+) json file )
+
 
 ### ER Diagram
 
@@ -134,6 +139,21 @@ coverage html *.py
 
 ## Deployment
 
+### Heroku
+
+This application is deployed to heroku [here](https://wickz-recipe-share.herokuapp.com/).
+
+When deploying to heroku use the following config vars
+
+| Variable        | Value  |
+| --------------- | ------ |
+|DEBUG| True or Empty |
+|MONGO_URI| MONGO connection link |
+|DBNAME| MONGO DB name |
+|IP| 0.0.0.0 |
+|PORT| 5000 |
+|SECRECT_KEY| yoursecretkey |
+
 ### Local deployment
 
 *Instructions for linux*
@@ -196,20 +216,6 @@ DEBUG = "True"
 ```bash
 python3 app.py
 ```
-
-### Heroku
-
-When deploying to heroku use the following config vars
-
-| Variable        | Value  |
-| --------------- | ------ |
-|DEBUG| True or Empty |
-|MONGO_URI| MONGO connection link |
-|DBNAME| MONGO DB name |
-|IP| 0.0.0.0 |
-|PORT| 5000 |
-|SECRECT_KEY| yoursecretkey |
-
 
 ## Credits
 

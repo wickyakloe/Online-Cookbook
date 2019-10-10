@@ -107,9 +107,9 @@
 <p id="t7" class="pln"><span class="str">    This is required to make Flask-Login work</span><span class="strut">&nbsp;</span></p>
 <p id="t8" class="pln"><span class="str">    see: https://flask-login.readthedocs.io/en/latest/#your-user-class</span><span class="strut">&nbsp;</span></p>
 <p id="t9" class="pln"><span class="str">    """</span><span class="strut">&nbsp;</span></p>
-<p id="t10" class="stm run hide_run">    <span class="key">def</span> <span class="nam">__init__</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">username</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
+<p id="t10" class="stm run hide_run">    <span class="key">def</span> <span class="nam">__init__</span><span class="op">(</span><span class="nam">self</span><span class="op">,</span> <span class="nam">username</span><span class="op">,</span> <span class="nam">display_name</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t11" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">username</span> <span class="op">=</span> <span class="nam">username</span><span class="strut">&nbsp;</span></p>
-<p id="t12" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">email</span> <span class="op">=</span> <span class="key">None</span><span class="strut">&nbsp;</span></p>
+<p id="t12" class="stm run hide_run">        <span class="nam">self</span><span class="op">.</span><span class="nam">display_name</span> <span class="op">=</span> <span class="nam">display_name</span><span class="strut">&nbsp;</span></p>
 <p id="t13" class="pln"><span class="strut">&nbsp;</span></p>
 <p id="t14" class="stm run hide_run">    <span class="key">def</span> <span class="nam">is_authenticated</span><span class="op">(</span><span class="nam">self</span><span class="op">)</span><span class="op">:</span><span class="strut">&nbsp;</span></p>
 <p id="t15" class="stm mis">        <span class="key">return</span> <span class="key">True</span><span class="strut">&nbsp;</span></p>
@@ -136,7 +136,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v4.5.4</a>,
-            created at 2019-10-03 15:27
+            created at 2019-10-10 23:06
         </p>
     </div>
 </div>
