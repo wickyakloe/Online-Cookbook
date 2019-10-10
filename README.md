@@ -217,6 +217,8 @@ When deploying to heroku use the following config vars
 
 - Flask-Login example > https://github.com/boh717/FlaskLogin-and-pymongo
 
+- Countries collections > https://github.com/ozlerhakan/mongodb-json-files/blob/master/datasets/countries-small.json
+
 ### Media
 - The icon used as logo in the navbar is from [iconstore](https://iconstore.co/icons/tasty-icons-free/)
 - Current displayed 'test' recipes are from [jamie oliver](https://www.jamieoliver.com/) website and from [allrecipes](https://www.allrecipes.com/)

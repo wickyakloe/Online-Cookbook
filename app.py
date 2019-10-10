@@ -131,7 +131,8 @@ def register():
         elif display_name:
             flash("Display name already exists")
 
-    return render_template("register.html", form=form)
+    return render_template("register.html", form=form,
+                           countries=mongo.db.countries.find())
 
 
 @app.route("/")

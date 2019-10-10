@@ -37,7 +37,12 @@
     <div class="row">
         <div class="input-field col s12 m6 offset-m3">
             <i class="material-icons prefix">lock_outline</i>
-            {{ form.country }}
+            <select id="country" name="country">
+                <option value="" disabled selected>Choose</option>
+                {% for country in countries | sort(attribute="name.official") %}
+                <option value="{{country.name.official}}">{{country.name.official}}</option>
+                {% endfor %}
+              </select>  
             <label for="country">Country</label>
         </div>
     </div>
