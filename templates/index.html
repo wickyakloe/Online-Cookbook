@@ -32,7 +32,7 @@
 </form>
 <!-- Materialize fab card -->
 <div class="row">
-    {% for recipe in recipes %}
+    {% for recipe in recipes | sort (True, attribute="date_updated") %}
     <div class="col s12 m4">
         <div class="card-panel blue-grey darken-3">
             <div class="row headers left-align">
