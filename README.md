@@ -141,7 +141,7 @@ coverage html *.py
 
 ### Heroku
 
-This application is deployed to heroku [here](https://wickz-recipe-share.herokuapp.com/).
+This application is deployed to heroku here [http://wickz-recipe-share.herokuapp.com/](http://wickz-recipe-share.herokuapp.com/).
 
 When deploying to heroku use the following config vars
 
