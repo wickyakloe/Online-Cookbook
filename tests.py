@@ -90,7 +90,8 @@ class tests_Flask_application(unittest.TestCase):
 
     def test_show_page(self):
         """Test if recipe.html
-        is accessible to all users
+        is accessible to all users.
+        Note that the ObjectId used is fictional
         """
         recipe_id = ObjectId("5d8359843a5f1a53eb5885b5")
         response = self.app.get('/recipe/{}'.format(recipe_id),
@@ -115,7 +116,8 @@ class tests_Flask_application(unittest.TestCase):
 
     def test_edit_page(self):
         """Test if editrecipe.html
-        is accessible to anonymous users
+        is accessible to anonymous users.
+        Note that the ObjectId used is fictional
         """
         recipe_id = ObjectId("5d8359843a5f1a53eb5885b5")
         response = self.app.get('/recipe/edit/{}'.format(recipe_id),
@@ -124,7 +126,8 @@ class tests_Flask_application(unittest.TestCase):
 
     def test_edit_page_loggedin(self):
         """Test if editrecipe.html
-        is accessible to loggedin users
+        is accessible to loggedin users.
+        Note that the ObjectId used is fictional
         """
         self.login('testUser', 'TestPass')
         recipe_id = ObjectId("5d8359843a5f1a53eb5885b5")
@@ -135,7 +138,8 @@ class tests_Flask_application(unittest.TestCase):
 
     def test_delete_page(self):
         """Test if anoymous users
-        are able to delete recipes
+        are able to delete recipes.
+        Note that the ObjectId used is fictional
         """
         recipe_id = ObjectId("5d8359843a5f1a53eb5885b5")
         response = self.app.get('/recipe/delete/{}'.format(recipe_id),
@@ -144,7 +148,8 @@ class tests_Flask_application(unittest.TestCase):
 
     def test_delete_page_loggedin(self):
         """Test if loggedin users
-        are able to delete recipes
+        are able to delete recipes.
+        Note that the ObjectId used is fictional
         """
         self.login('testUser', 'TestPass')
         recipe_id = ObjectId("5d8359843a5f1a53eb5885b5")
