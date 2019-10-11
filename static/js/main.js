@@ -20,7 +20,7 @@ $(document).ready(function(){
 // Functions used on createrecipe.html and editrecipe.html
 function addIngredient(){
     let i = parseInt($(".ingredient:last").attr('id').slice(10))
-    if(i == 1){
+    if(i === 1){
       i++
       $(`<div class="input-field col s3 ingredient${i}">
             <input id="ingredient${i}" name="ingredient${i}" type="text" class="validate ingredient" required>
@@ -36,7 +36,7 @@ function addIngredient(){
 
 function removeLastIngredient(){
     let i = parseInt($(".ingredient:last").attr('id').slice(10))
-    if(i == 2){
+    if(i === 2){
       $(`.ingredient${i}`).remove()
       $("a[onclick='removeLastIngredient()']").remove()
     } else{
@@ -46,7 +46,7 @@ function removeLastIngredient(){
 
 function addTool(){
     let i = parseInt($(".cooking_tool:last").attr('id').slice(12))
-    if(i == 1){
+    if(i === 1){
       i++
       $(`<div class="input-field col s3 cooking_tool${i}">
             <input id="cooking_tool${i}" name="cooking_tool${i}" type="text" class="validate cooking_tool" required>
@@ -62,7 +62,7 @@ function addTool(){
 
 function removeLastTool(){
     let i = parseInt($(".cooking_tool:last").attr('id').slice(12))
-    if(i == 2){
+    if(i === 2){
       $(`.cooking_tool${i}`).remove()
       $("a[onclick='removeLastTool()']").remove()
     } else{
