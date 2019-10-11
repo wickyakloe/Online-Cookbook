@@ -6,14 +6,12 @@
       <ul class="crudMenu hide-on-small-only">
           <li><a href="{{ url_for('my_recipes') }}" class="crudMenuItem crudActive">My Recipes</a><span class="right-align chevronMenuItem chevronAlign chevronActive">></span></li>
           <li><a href="{{ url_for('create_recipe')}}" class="crudMenuItem">Create Recipe</a><span class="right-align chevronMenuItem">></span></li>
-          <li><a href="#" class="crudMenuItem">Edit Recipe</a><span class="right-align chevronMenuItem chevronAlign">></span></li>
       </ul>
     </div>
 
     <ul class="sidenav" id="mobile-demo">
         <li><a href="{{ url_for('my_recipes') }}" class="crudMenuItem">My Recipes</a></li>
         <li><a href="{{ url_for('create_recipe') }}" class="crudMenuItem crudActive">Create Recipe</a></li>
-        <li><a href="#" class="crudMenuItem">Edit Recipe</a></li>
      </ul>
      {% if current_user.is_authenticated %}
      <h4 class="blue-grey-text text-darken-3">Recipes created by: <span class="yellow-text text-darken-3">{{ current_user.display_name }}</span></h4>
